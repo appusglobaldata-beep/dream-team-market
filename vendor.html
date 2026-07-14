@@ -34,7 +34,7 @@ border-radius:10px;
 box-shadow:0 2px 5px #ccc;
 }
 
-input, textarea{
+input,textarea{
 
 width:100%;
 padding:12px;
@@ -52,17 +52,6 @@ background:#0b7a3d;
 color:white;
 border:none;
 border-radius:5px;
-font-size:16px;
-
-}
-
-#preview{
-
-width:100%;
-height:180px;
-object-fit:cover;
-display:none;
-border-radius:10px;
 
 }
 
@@ -92,22 +81,13 @@ border-radius:10px;
 <h3>Add Product</h3>
 
 
-<input type="file" id="image" accept="image/*" onchange="showImage(event)">
-
-
-<img id="preview">
-
-
-
 <input type="text" id="name" placeholder="Product Name">
 
 
 <input type="number" id="price" placeholder="Price">
 
 
-
 <textarea id="description" placeholder="Product Description"></textarea>
-
 
 
 <button onclick="addProduct()">
@@ -123,60 +103,69 @@ Publish Product
 
 <div class="card">
 
-<h3>Vendor Account</h3>
+<h3>Your Store</h3>
 
 <p>Store Name: Dream Store</p>
 
-<p>Total Sales: ₦0</p>
-
-<p>Orders: 0</p>
+<p>Status: Active</p>
 
 </div>
 
 
 
 </div>
+
 
 
 
 <script>
 
 
-function showImage(event){
-
-let image=document.getElementById("preview");
-
-image.src=URL.createObjectURL(event.target.files[0]);
-
-image.style.display="block";
-
-}
-
-
-
 function addProduct(){
 
-let name=document.getElementById("name").value;
 
-let price=document.getElementById("price").value;
+let name = document.getElementById("name").value;
+
+let price = document.getElementById("price").value;
+
+let description = document.getElementById("description").value;
+
 
 
 if(name=="" || price==""){
 
-alert("Please fill product details");
+alert("Fill product details");
 
 return;
 
 }
 
 
+
+let product = {
+
+name:name,
+
+price:price,
+
+description:description
+
+};
+
+
+
+localStorage.setItem("product", JSON.stringify(product));
+
+
 alert("Product Published Successfully!");
+
+
 
 }
 
 
-</script>
 
+</script>
 
 
 </body>
