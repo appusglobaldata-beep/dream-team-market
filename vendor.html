@@ -29,7 +29,7 @@ padding:20px;
 .card{
 background:white;
 padding:20px;
-margin-bottom:20px;
+margin-bottom:15px;
 border-radius:10px;
 box-shadow:0 2px 5px #ccc;
 }
@@ -39,8 +39,8 @@ input,textarea{
 width:100%;
 padding:12px;
 margin:8px 0;
-border:1px solid #ccc;
 border-radius:5px;
+border:1px solid #ccc;
 
 }
 
@@ -72,7 +72,6 @@ border-radius:5px;
 </header>
 
 
-
 <div class="container">
 
 
@@ -81,13 +80,13 @@ border-radius:5px;
 <h3>Add Product</h3>
 
 
-<input type="text" id="name" placeholder="Product Name">
+<input id="name" placeholder="Product Name">
 
 
-<input type="number" id="price" placeholder="Price">
+<input id="price" placeholder="Price">
 
 
-<textarea id="description" placeholder="Product Description"></textarea>
+<textarea id="description" placeholder="Description"></textarea>
 
 
 <button onclick="addProduct()">
@@ -100,21 +99,7 @@ Publish Product
 </div>
 
 
-
-<div class="card">
-
-<h3>Your Store</h3>
-
-<p>Store Name: Dream Store</p>
-
-<p>Status: Active</p>
-
 </div>
-
-
-
-</div>
-
 
 
 
@@ -124,45 +109,41 @@ Publish Product
 function addProduct(){
 
 
-let name = document.getElementById("name").value;
-
-let price = document.getElementById("price").value;
-
-let description = document.getElementById("description").value;
-
-
-
-if(name=="" || price==""){
-
-alert("Fill product details");
-
-return;
-
-}
-
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
 
 let product = {
 
-name:name,
+name: document.getElementById("name").value,
 
-price:price,
+price: document.getElementById("price").value,
 
-description:description
+description: document.getElementById("description").value
 
 };
 
 
 
-localStorage.setItem("product", JSON.stringify(product));
+products.push(product);
 
 
-alert("Product Published Successfully!");
 
+localStorage.setItem("products", JSON.stringify(products));
+
+
+
+alert("Product Added Successfully!");
+
+
+
+document.getElementById("name").value="";
+
+document.getElementById("price").value="";
+
+document.getElementById("description").value="";
 
 
 }
-
 
 
 </script>
