@@ -1,99 +1,46 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<title>Vendor - Add Product</title>
+<title>Vendor Panel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{font-family:Arial;background:#f5f5f5;margin:0;}
-header{background:#0b7a3d;color:white;padding:20px;text-align:center;}
-.container{padding:20px;}
-.card{background:white;padding:20px;border-radius:10px;}
-input,textarea,select{width:100%;padding:10px;margin:8px 0;}
-button{width:100%;padding:12px;background:#0b7a3d;color:white;border:none;}
+body{font-family:Arial;background:#f5f5f5;padding:20px;}
+input,button{padding:10px;margin:5px;width:100%;}
+button{background:black;color:white;border:none;}
 </style>
-
 </head>
 
 <body>
 
-<header>
-<h2>Add Product</h2>
-</header>
+<h2>Vendor Dashboard 🏪</h2>
 
-<div class="container">
-<div class="card">
-
-<input id="store" placeholder="Store Name">
+<input id="vendor" placeholder="Your Name">
 <input id="name" placeholder="Product Name">
-
-<select id="category">
-<option>Phones</option>
-<option>Fashion</option>
-<option>Electronics</option>
-</select>
-
 <input id="price" placeholder="Price">
-<textarea id="description" placeholder="Description"></textarea>
 
-<input type="file" id="images" multiple>
-
-<button onclick="addProduct()">Publish Product</button>
-
-</div>
-</div>
+<button onclick="addProduct()">Add Product</button>
 
 <script>
-
 function addProduct(){
 
-let files = document.getElementById("images").files;
-
-if(files.length === 0){
-alert("Select images");
-return;
-}
+let vendor = document.getElementById("vendor").value;
+let name = document.getElementById("name").value;
+let price = document.getElementById("price").value;
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
-let images = [];
-let count = 0;
-
-for(let i=0;i<files.length;i++){
-
-let reader = new FileReader();
-
-reader.onload = function(e){
-
-images.push(e.target.result);
-count++;
-
-if(count === files.length){
-
 products.push({
-store:store.value,
-name:name.value,
-category:category.value,
-price:price.value,
-description:description.value,
-images:images
+name,
+price,
+vendor
 });
 
 localStorage.setItem("products", JSON.stringify(products));
 
-alert("Product Published!");
+alert("Product Added");
 
 }
-
-};
-
-reader.readAsDataURL(files[i]);
-
-}
-
-}
-
 </script>
 
 </body>
