@@ -10,31 +10,19 @@ body{
     margin:0;
 }
 
-.header{
+header{
     background:#008000;
     color:white;
     padding:20px;
     text-align:center;
 }
 
-.container{
-    padding:20px;
-}
-
-.card{
+.box{
     background:white;
+    margin:20px;
     padding:20px;
-    margin:15px 0;
     border-radius:10px;
     box-shadow:0 0 10px #ccc;
-}
-
-button{
-    background:#008000;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:5px;
 }
 
 input{
@@ -43,50 +31,60 @@ input{
     margin:10px 0;
 }
 
+button{
+    background:#008000;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:5px;
+}
+
+a{
+    color:#008000;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="header">
-<h2>Vendor Dashboard</h2>
+<header>
+<h1>Vendor Dashboard</h1>
 <p>Dream Team Market</p>
-</div>
+</header>
 
-<div class="container">
 
-<div class="card">
-<h3>Add New Product</h3>
+<div class="box">
+
+<h2>Add Product</h2>
 
 <input type="text" placeholder="Product Name">
 
-<input type="number" placeholder="Price">
+<input type="number" placeholder="Product Price">
 
-<input type="text" placeholder="Product Image Link">
+<input type="text" placeholder="Product Image">
 
 <button>Add Product</button>
 
 </div>
 
 
-<div class="card">
-<h3>Your Products</h3>
+<div class="box">
+
+<h2>Your Products</h2>
 
 <p>No products added yet.</p>
 
 </div>
 
 
-<div class="card">
-<h3>Orders</h3>
+<div class="box">
 
-<p>No orders available.</p>
-
-</div>
-
+<a href="index.html">Back Home</a>
 
 </div>
+
 
 </body>
 </html>
