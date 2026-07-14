@@ -1,157 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Dream Team Market</title>
+<title>Vendor Dashboard - Dream Team Market</title>
 
 <style>
-
 body{
-    font-family:Arial;
-    margin:0;
-    background:#f5f5f5;
+font-family:Arial;
+background:#f5f5f5;
+margin:0;
 }
 
 header{
-    background:#008000;
-    color:white;
-    padding:20px;
-    text-align:center;
+background:#008000;
+color:white;
+padding:20px;
+text-align:center;
 }
 
-nav{
-    background:white;
-    padding:15px;
-    text-align:center;
+.box{
+background:white;
+margin:20px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px #ccc;
 }
 
-nav a{
-    text-decoration:none;
-    color:#008000;
-    margin:10px;
-    font-weight:bold;
-}
-
-.container{
-    text-align:center;
-    padding:50px 20px;
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
 }
 
 button{
-    background:#008000;
-    color:white;
-    border:none;
-    padding:15px 30px;
-    border-radius:5px;
-    font-size:16px;
+background:#008000;
+color:white;
+border:none;
+padding:12px;
+border-radius:5px;
 }
 
-.card{
-    background:white;
-    margin:20px;
-    padding:20px;
-    border-radius:10px;
+img{
+width:150px;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.product{
+border:1px solid #ddd;
+padding:15px;
+margin:10px 0;
 }
 
 </style>
 
 </head>
 
-
 <body>
 
-
 <header>
-
-<h1>Dream Team Market</h1>
-
-<p>Online Marketplace</p>
-
+<h1>Vendor Dashboard</h1>
+<p>Dream Team Market</p>
 </header>
 
 
+<div class="box">
 
-<nav>
+<h2>Add Product</h2>
 
-<a href="index.html">Home</a>
+<input id="name" placeholder="Product Name">
 
-<a href="login.html">Login</a>
+<input id="price" placeholder="Product Price">
 
-<a href="register.html">Register</a>
-
-<a href="vendor.html">Vendor</a>
-
-<a href="customer.html">Customer</a>
-
-<a href="payment.html">Payment</a>
-
-</nav>
+<input type="file" id="image" accept="image/*">
 
 
-
-
-<div class="container">
-
-<h1>Buy and Sell Easily</h1>
-
-<p>
-Join Dream Team Market today.
-</p>
-
-
-<a href="register.html">
-
-<button>
-Get Started
-</button>
-
-</a>
-
+<button onclick="addProduct()">Add Product</button>
 
 </div>
 
 
 
-<div class="card">
+<div class="box">
 
-<h2>Become a Vendor</h2>
+<h2>Your Products</h2>
 
-<p>
-Sell your products on Dream Team Market.
-</p>
-
-<a href="vendor.html">
-
-<button>
-Start Selling
-</button>
-
-</a>
+<div id="list"></div>
 
 </div>
 
 
 
+<script>
 
-<div class="card">
+function addProduct(){
 
-<h2>Shop Products</h2>
+let name=document.getElementById("name").value;
 
-<p>
-Find products from different vendors.
-</p>
+let price=document.getElementById("price").value;
 
-<a href="customer.html">
+let image=document.getElementById("image").files[0];
 
-<button>
-Shop Now
-</button>
 
-</a>
+if(name && price && image){
 
-</div>
+let reader=new FileReader();
+
+
+reader.onload=function(e){
+
+let products=JSON.parse(localStorage.getItem("products")) || [];
+
+
+products.push({
+
+name:name,
+
+price:price,
+
+image:e.target.result
+
+});
+
+
+localStorage.setItem("products",JSON.stringify(products));
+
+
+displayProducts();
+
+};
+
+
+reader.readAsDataURL(image);
+
+
+}else{
+
+alert("Please fill all fields and select an image");
+
+}
+
+}
+
+
+
+function displayProducts(){
+
+let products=JSON.parse(localStorage.getItem("products")) || [];
+
+let output="";
+
+
+products.forEach(function(product){
+
+output +=
+
+"<div class='product'>"+
+
+"<img src='"+product.image+"'>"+
+
+"<h3>"+product.name+"</h3>"+
+
+"<p>Price: ₦"+product.price+"</p>"+
+
+"</div>";
+
+});
+
+
+document.getElementById("list").innerHTML=output;
+
+}
+
+
+displayProducts();
+
+
+</script>
 
 
 </body>
-
 </html>
