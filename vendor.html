@@ -2,57 +2,41 @@
 <html>
 <head>
 <title>Vendor Dashboard - Dream Team Market</title>
-
 <style>
 body{
-font-family:Arial;
-margin:0;
-background:#f5f5f5;
+    font-family: Arial;
+    margin:0;
+    background:#f5f5f5;
 }
-
 .header{
-background:#0b8f3c;
-color:white;
-padding:20px;
-font-size:25px;
+    background:#0b8f4d;
+    color:white;
+    padding:20px;
+    font-size:24px;
 }
-
 .container{
-padding:20px;
+    padding:20px;
 }
-
 .card{
-background:white;
-padding:20px;
-margin:15px 0;
-border-radius:10px;
-box-shadow:0 2px 8px #ccc;
+    background:white;
+    padding:20px;
+    margin:15px 0;
+    border-radius:10px;
+    box-shadow:0 2px 8px #ccc;
 }
-
 button{
-background:#0b8f3c;
-color:white;
-border:none;
-padding:12px;
-border-radius:5px;
+    background:#0b8f4d;
+    color:white;
+    border:0;
+    padding:12px 20px;
+    border-radius:5px;
 }
-
-.menu{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
 }
-
-.box{
-background:white;
-padding:20px;
-width:200px;
-border-radius:10px;
-box-shadow:0 2px 8px #ccc;
-}
-
 </style>
-
 </head>
 
 <body>
@@ -61,64 +45,31 @@ box-shadow:0 2px 8px #ccc;
 Dream Team Market - Vendor Dashboard
 </div>
 
-
 <div class="container">
 
+<div class="card">
 <h2>Welcome Vendor</h2>
-
-
-<div class="menu">
-
-<div class="box">
-<h3>Products</h3>
-<p>0 Products</p>
+<p>Manage your products and sales here.</p>
 </div>
-
-
-<div class="box">
-<h3>Orders</h3>
-<p>0 Orders</p>
-</div>
-
-
-<div class="box">
-<h3>Earnings</h3>
-<p>₦0</p>
-</div>
-
-
-<div class="box">
-<h3>Customers</h3>
-<p>0 Customers</p>
-</div>
-
-</div>
-
 
 <div class="card">
-
 <h3>Add New Product</h3>
 
-<input type="text" placeholder="Product Name"><br><br>
-
-<input type="number" placeholder="Price"><br><br>
+<input type="text" placeholder="Product Name">
+<input type="number" placeholder="Price">
+<input type="text" placeholder="Product Image URL">
 
 <button>Add Product</button>
 
 </div>
 
-
 <div class="card">
-
-<h3>Recent Orders</h3>
-
-<p>No orders yet</p>
-
+<h3>Your Store</h3>
+<p>Total Products: 0</p>
+<p>Total Sales: ₦0</p>
 </div>
 
-
 </div>
-
 
 </body>
 </html>
