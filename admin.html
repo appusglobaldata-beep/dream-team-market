@@ -1,42 +1,232 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Admin Login</title>
+<title>Admin Panel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{font-family:Arial;background:#f5f5f5;text-align:center;padding-top:100px;}
-input,button{padding:10px;margin:10px;width:250px;}
-button{background:black;color:white;border:none;}
+body{font-family:Arial;background:#f5f5f5;margin:0;}
+header{background:#111;color:white;padding:15px;text-align:center;}
+.container{padding:15px;}
+
+.section{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.item{
+border-bottom:1px solid #ddd;
+padding:10px 0;
+}
+
+button{
+padding:6px 10px;
+margin-top:5px;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+.delete{background:red;}
+.clear{background:#333;}
+.status{background:green;}
+.logout{background:orange;margin-top:10px;}
 </style>
+
 </head>
 
 <body>
 
-<h2>Admin Login 🔐</h2>
+<header>
+<h2>Admin Panel ⚙️</h2>
+<button class="logout" onclick="logout()">Logout</button>
+</header>
 
-<input type="text" id="user" placeholder="Username"><br>
-<input type="password" id="pass" placeholder="Password"><br>
+<div class="container">
 
-<button onclick="login()">Login</button>
+<!-- PRODUCTS -->
+<div class="section">
+<h3>Products</h3>
+<div id="products"></div>
+<button class="clear" onclick="clearProducts()">Clear All</button>
+</div>
+
+<!-- USERS -->
+<div class="section">
+<h3>Users</h3>
+<div id="users"></div>
+<button class="clear" onclick="clearUsers()">Clear All</button>
+</div>
+
+<!-- ORDERS -->
+<div class="section">
+<h3>Orders</h3>
+<div id="orders"></div>
+<button class="clear" onclick="clearOrders()">Clear All</button>
+</div>
+
+</div>
 
 <script>
-function login(){
 
-let u = document.getElementById("user").value;
-let p = document.getElementById("pass").value;
+// 🔐 PROTECT PAGE
+if(localStorage.getItem("admin") !== "true"){
+window.location = "admin-login.html";
+}
 
-// CHANGE THIS
-if(u === "admin" && p === "1234"){
+// LOGOUT
+function logout(){
+localStorage.removeItem("admin");
+window.location = "admin-login.html";
+}
 
-localStorage.setItem("admin","true");
-window.location = "admin.html";
 
-}else{
-alert("Wrong login");
+// PRODUCTS
+function loadProducts(){
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+let box = document.getElementById("products");
+box.innerHTML = "";
+
+products.forEach((p,i)=>{
+
+box.innerHTML += `
+<div class="item">
+<b>${p.name}</b> - ₦${p.price}
+<br>
+Vendor: ${p.vendor || "N/A"}
+<br>
+<button class="delete" onclick="deleteProduct(${i})">Delete</button>
+</div>
+`;
+
+});
+
+}
+
+function deleteProduct(i){
+let products = JSON.parse(localStorage.getItem("products")) || [];
+products.splice(i,1);
+localStorage.setItem("products", JSON.stringify(products));
+loadProducts();
+}
+
+function clearProducts(){
+localStorage.removeItem("products");
+loadProducts();
+}
+
+
+// USERS
+function loadUsers(){
+
+let users = [];
+
+for(let i=0;i<localStorage.length;i++){
+let key = localStorage.key(i);
+
+if(key.startsWith("orders_")){
+let name = key.split("_")[1];
+if(!users.includes(name)){
+users.push(name);
+}
+}
+}
+
+let box = document.getElementById("users");
+box.innerHTML = "";
+
+users.forEach(user=>{
+box.innerHTML += `<div class="item">${user}</div>`;
+});
+
+}
+
+function clearUsers(){
+
+let keys = Object.keys(localStorage);
+
+keys.forEach(key=>{
+if(key.startsWith("orders_") || key.startsWith("cart_")){
+localStorage.removeItem(key);
+}
+});
+
+loadUsers();
+}
+
+
+// ORDERS
+function loadOrders(){
+
+let box = document.getElementById("orders");
+box.innerHTML = "";
+
+for(let i=0;i<localStorage.length;i++){
+
+let key = localStorage.key(i);
+
+if(key.startsWith("orders_")){
+
+let user = key.split("_")[1];
+let orders = JSON.parse(localStorage.getItem(key)) || [];
+
+orders.forEach((o,index)=>{
+
+box.innerHTML += `
+<div class="item">
+<b>User:</b> ${user}<br>
+<b>Total:</b> ₦${o.total}<br>
+<b>Payment:</b> ${o.payment}<br>
+<b>Status:</b> ${o.status || "Pending"}<br>
+<button class="status" onclick="updateStatus('${key}',${index})">Mark Delivered</button>
+</div>
+`;
+
+});
+
 }
 
 }
+
+}
+
+function updateStatus(key,index){
+
+let orders = JSON.parse(localStorage.getItem(key)) || [];
+
+orders[index].status = "Delivered";
+
+localStorage.setItem(key, JSON.stringify(orders));
+
+loadOrders();
+
+}
+
+function clearOrders(){
+
+let keys = Object.keys(localStorage);
+
+keys.forEach(key=>{
+if(key.startsWith("orders_")){
+localStorage.removeItem(key);
+}
+});
+
+loadOrders();
+
+}
+
+
+// INIT
+loadProducts();
+loadUsers();
+loadOrders();
+
 </script>
 
 </body>
