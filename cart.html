@@ -57,7 +57,9 @@ text-align:center;
 
 <script>
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let currentUser = localStorage.getItem("currentUser");
+
+let cart = JSON.parse(localStorage.getItem("cart_" + currentUser)) || [];
 
 function render(){
 
@@ -89,7 +91,7 @@ function removeItem(index){
 
 cart.splice(index,1);
 
-localStorage.setItem("cart", JSON.stringify(cart));
+localStorage.setItem("cart_" + currentUser, JSON.stringify(cart));
 
 render();
 
