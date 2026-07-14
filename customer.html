@@ -45,7 +45,6 @@ border-radius:5px;
 }
 
 .bottom-menu{
-
 position:fixed;
 bottom:0;
 left:0;
@@ -53,17 +52,14 @@ width:100%;
 background:#0b7a3d;
 display:flex;
 justify-content:space-around;
-padding:10px 0;
-
+padding:10px;
 }
 
 .bottom-menu a{
-
 color:white;
 text-decoration:none;
 text-align:center;
 font-size:13px;
-
 }
 
 </style>
@@ -84,54 +80,25 @@ font-size:13px;
 
 
 
-
 <div class="container">
-
-
-<h3>
-Cart Items: <span id="count">0</span>
-</h3>
-
-
 
 <div id="products"></div>
 
-
-
 </div>
-
 
 
 
 <div class="bottom-menu">
 
+<a href="index.html">🏠<br>Home</a>
 
-<a href="index.html">
-🏠<br>
-Home
-</a>
+<a href="customer.html">🛒<br>Shop</a>
 
+<a href="cart.html">🛍️<br>Cart</a>
 
-<a href="customer.html">
-🛒<br>
-Shop
-</a>
-
-
-<a href="cart.html">
-🛍️<br>
-Cart
-</a>
-
-
-<a href="profile.html">
-👤<br>
-Profile
-</a>
-
+<a href="profile.html">👤<br>Profile</a>
 
 </div>
-
 
 
 
@@ -141,21 +108,8 @@ Profile
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-
-let box = document.getElementById("products");
-
-
-document.getElementById("count").innerHTML = cart.length;
-
-
-
-if(products.length == 0){
-
-box.innerHTML="<h3>No Products Available</h3>";
-
-}
+let box=document.getElementById("products");
 
 
 
@@ -171,13 +125,18 @@ box.innerHTML += `
 <h3>${product.name}</h3>
 
 
-<p>Vendor: ${product.store || "Vendor"}</p>
-
-
-<p>Price: ₦${product.price}</p>
+<p>₦${product.price}</p>
 
 
 <p>${product.description}</p>
+
+
+
+<button onclick="viewProduct(${index})">
+
+View Product
+
+</button>
 
 
 
@@ -194,13 +153,31 @@ Add To Cart
 
 `;
 
+
+
 });
 
 
 
 
+function viewProduct(index){
+
+
+localStorage.setItem("selectedProduct",JSON.stringify(products[index]));
+
+
+window.location.href="product.html";
+
+
+}
+
+
+
 
 function addCart(index){
+
+
+let cart=JSON.parse(localStorage.getItem("cart")) || [];
 
 
 cart.push(products[index]);
@@ -209,10 +186,7 @@ cart.push(products[index]);
 localStorage.setItem("cart",JSON.stringify(cart));
 
 
-document.getElementById("count").innerHTML=cart.length;
-
-
-alert("Added to cart");
+alert("Added to Cart");
 
 
 }
@@ -220,7 +194,6 @@ alert("Added to cart");
 
 
 </script>
-
 
 
 </body>
