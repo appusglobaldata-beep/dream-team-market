@@ -1,157 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dream Team Market</title>
+<title>Dream Team Market</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<style>
+body{
+    font-family:Arial, sans-serif;
+    margin:0;
+    background:#f5f5f5;
+}
 
-    body {
-      background: #f4f6f9;
-      color: #333;
-    }
+header{
+    background:#008000;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+nav{
+    background:white;
+    padding:15px;
+    text-align:center;
+}
 
-    header h1 {
-      font-size: 20px;
-    }
+nav a{
+    text-decoration:none;
+    margin:10px;
+    color:#008000;
+    font-weight:bold;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 15px;
-      padding: 8px 12px;
-      border-radius: 5px;
-    }
+.hero{
+    text-align:center;
+    padding:60px 20px;
+}
 
-    nav a:hover {
-      background: #2563eb;
-    }
+.hero h1{
+    font-size:35px;
+}
 
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(to right, #2563eb, #1e40af);
-      color: white;
-    }
+.hero p{
+    font-size:18px;
+}
 
-    .hero h2 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
+button{
+    background:#008000;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+}
 
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
+.section{
+    padding:20px;
+}
 
-    .hero button {
-      padding: 12px 20px;
-      background: white;
-      color: #2563eb;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.card{
+    background:white;
+    padding:20px;
+    margin:15px;
+    border-radius:10px;
+    box-shadow:0 0 10px #ccc;
+}
 
-    .hero button:hover {
-      background: #e5e7eb;
-    }
+footer{
+    background:#008000;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
 
-    .section {
-      padding: 40px 20px;
-      text-align: center;
-    }
+</style>
 
-    .cards {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      width: 250px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111827;
-      color: white;
-      margin-top: 40px;
-    }
-  </style>
 </head>
 
 <body>
 
+
 <header>
-  <h1>Dream Team Market</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="login.html">Login</a>
-    <a href="register.html">Create Account</a>
-    <a href="vendor.html">Vendor</a>
-    <a href="customer.html">Customer</a>
-    <a href="payment.html">Payment</a>
-  </nav>
+
+<h1>Dream Team Market</h1>
+
+<p>Your Trusted Online Marketplace</p>
+
 </header>
 
-<section class="hero">
-  <h2>Buy & Sell Digital Products Securely</h2>
-  <p>Multi-vendor marketplace with escrow protection</p>
-  <button onclick="location.href='register.html'">Get Started</button>
-</section>
 
-<section class="section">
-  <h2>Features</h2>
+<nav>
 
-  <div class="cards">
-    <div class="card">
-      <h3>Secure Payments</h3>
-      <p>Pay safely using Paystack integration.</p>
-    </div>
+<a href="index.html">Home</a>
 
-    <div class="card">
-      <h3>Vendor System</h3>
-      <p>Anyone can become a seller and list products.</p>
-    </div>
+<a href="login.html">Login</a>
 
-    <div class="card">
-      <h3>Fast Delivery</h3>
-      <p>Instant access to digital products after purchase.</p>
-    </div>
-  </div>
-</section>
+<a href="register.html">Register</a>
+
+<a href="vendor.html">Vendor</a>
+
+<a href="customer.html">Customer</a>
+
+<a href="payment.html">Payment</a>
+
+</nav>
+
+
+
+<div class="hero">
+
+<h1>Buy & Sell Anything Easily</h1>
+
+<p>
+Join Dream Team Market and connect with customers and vendors.
+</p>
+
+
+<a href="register.html">
+
+<button>
+Get Started
+</button>
+
+</a>
+
+
+</div>
+
+
+
+<div class="section">
+
+
+<div class="card">
+
+<h2>For Customers</h2>
+
+<p>
+Find products, place orders and make secure payments.
+</p>
+
+<a href="customer.html">
+<button>Shop Now</button>
+</a>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>For Vendors</h2>
+
+<p>
+Create your store, upload products and manage orders.
+</p>
+
+<a href="vendor.html">
+<button>Start Selling</button>
+</a>
+
+</div>
+
+
+</div>
+
+
 
 <footer>
-  <p>© 2026 Dream Team Market. All rights reserved.</p>
+
+<p>
+© 2026 Dream Team Market. All Rights Reserved.
+</p>
+
 </footer>
+
 
 </body>
 </html>
