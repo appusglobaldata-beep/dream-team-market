@@ -23,21 +23,17 @@ text-align:center;
 }
 
 .box{
-
 background:white;
 margin:20px;
 padding:20px;
 border-radius:10px;
-
 }
 
 .notification{
-
 background:#eee;
 padding:12px;
 margin-bottom:10px;
 border-radius:5px;
-
 }
 
 </style>
@@ -58,9 +54,7 @@ border-radius:5px;
 
 
 
-<div class="box" id="notifications">
-
-</div>
+<div class="box" id="notifications"></div>
 
 
 
@@ -69,21 +63,17 @@ border-radius:5px;
 
 let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
 
-
-let box=document.getElementById("notifications");
-
+let box = document.getElementById("notifications");
 
 
-if(notifications.length==0){
 
-box.innerHTML="<h3>No Notifications</h3>";
+if(notifications.length == 0){
 
-}
+box.innerHTML = "<h3>No Notifications</h3>";
 
-
+} else {
 
 notifications.forEach(function(note){
-
 
 box.innerHTML += `
 
@@ -95,10 +85,13 @@ ${note}
 
 `;
 
-
-
 });
 
+}
+
+
+// ✅ CLEAR AFTER VIEWING
+localStorage.removeItem("notifications");
 
 
 </script>
