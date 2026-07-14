@@ -9,98 +9,64 @@
 <style>
 
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f5f5f5;
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
 }
-
 
 header{
-    background:#008000;
-    color:white;
-    padding:25px;
-    text-align:center;
+background:#008000;
+color:white;
+padding:25px;
+text-align:center;
 }
-
 
 nav{
-    background:white;
-    padding:15px;
-    text-align:center;
+background:white;
+padding:15px;
+text-align:center;
 }
-
 
 nav a{
-    color:#008000;
-    text-decoration:none;
-    margin:10px;
-    font-weight:bold;
+color:#008000;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
 }
-
 
 .container{
-    padding:25px;
+padding:25px;
 }
-
-
-
-.search{
-
-width:100%;
-padding:14px;
-border:1px solid #ddd;
-border-radius:5px;
-margin-bottom:20px;
-
-}
-
-
 
 .products{
-
 display:flex;
 flex-wrap:wrap;
 gap:20px;
-
 }
 
-
-
 .card{
-
 background:white;
 width:280px;
 padding:20px;
 border-radius:15px;
 box-shadow:0 5px 15px #ddd;
-
 }
 
-
-
 .card img{
-
 width:100%;
 height:200px;
 object-fit:cover;
 border-radius:10px;
-
 }
 
-
-
 button{
-
 background:#008000;
 color:white;
 border:none;
 padding:12px 20px;
 border-radius:5px;
 cursor:pointer;
-
 }
-
-
 
 </style>
 
@@ -110,7 +76,6 @@ cursor:pointer;
 <body>
 
 
-
 <header>
 
 <h1>Dream Team Market</h1>
@@ -118,7 +83,6 @@ cursor:pointer;
 <p>Find your favorite products</p>
 
 </header>
-
 
 
 <nav>
@@ -131,16 +95,10 @@ cursor:pointer;
 
 
 
-
 <div class="container">
 
 
-<input class="search" placeholder="Search products...">
-
-
-
 <h2>Available Products</h2>
-
 
 
 <div class="products" id="products">
@@ -148,9 +106,7 @@ cursor:pointer;
 </div>
 
 
-
 </div>
-
 
 
 
@@ -158,15 +114,13 @@ cursor:pointer;
 <script>
 
 
-
 function loadProducts(){
 
 
-let products=JSON.parse(localStorage.getItem("products")) || [];
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
 
 let output="";
-
 
 
 products.forEach(function(p){
@@ -183,7 +137,7 @@ output += `
 <p>Price: ₦${p.price}</p>
 
 
-<button onclick="pay('${p.price}')">
+<button onclick="buyProduct('${p.name}','${p.price}')">
 
 Buy Now
 
@@ -198,33 +152,58 @@ Buy Now
 });
 
 
-
 document.getElementById("products").innerHTML=output;
-
 
 
 }
 
 
 
-function pay(price){
 
+function buyProduct(name,price){
+
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+
+orders.push({
+
+product:name,
+
+price:price,
+
+status:"Pending"
+
+});
+
+
+localStorage.setItem("orders",JSON.stringify(orders));
+
+
+pay(price);
+
+
+}
+
+
+
+
+function pay(price){
 
 
 let handler = PaystackPop.setup({
 
 
-key: 'pk_test_e5155a948fb02b41f36d131f41e7d19a22b9ed22',
+key:'pk_test_e5155a948fb02b41f36d131f41e7d19a22b9ed22',
 
 
 email:'customer@email.com',
 
 
-amount: Number(price) * 100,
+amount:Number(price)*100,
 
 
 currency:'NGN',
-
 
 
 callback:function(response){
@@ -244,9 +223,7 @@ alert("Payment cancelled");
 });
 
 
-
 handler.openIframe();
-
 
 
 }
@@ -256,9 +233,7 @@ handler.openIframe();
 loadProducts();
 
 
-
 </script>
-
 
 
 </body>
