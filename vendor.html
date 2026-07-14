@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Vendor Dashboard - Dream Team Market</title>
+
+<title>Dream Team Market - Vendor</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 body{
 font-family:Arial;
 margin:0;
 background:#f5f5f5;
 }
 
-.header{
-background:#0b8f4d;
+header{
+background:#0b7a3d;
 color:white;
 padding:20px;
-font-size:24px;
-}
-
-button{
-background:#0b8f4d;
-color:white;
-border:0;
-padding:12px 20px;
-border-radius:5px;
-margin-top:10px;
+text-align:center;
 }
 
 .container{
@@ -33,39 +28,55 @@ padding:20px;
 .card{
 background:white;
 padding:20px;
-margin:15px 0;
+margin-bottom:15px;
 border-radius:10px;
-box-shadow:0 2px 8px #ccc;
+box-shadow:0 2px 5px #ccc;
 }
 
-input,textarea,select{
+input,textarea{
 width:100%;
 padding:12px;
 margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
-.product img{
-width:100px;
-height:100px;
-object-fit:cover;
+button{
+width:100%;
+padding:12px;
+background:#0b7a3d;
+color:white;
+border:none;
+border-radius:5px;
+font-size:16px;
+}
+
+.image-box{
+height:180px;
+border:2px dashed #0b7a3d;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:10px;
 border-radius:10px;
 }
+
 </style>
 
 </head>
 
+
 <body>
 
-<div class="header">
-Dream Team Market - Vendor
 
-<br>
+<header>
 
-<button onclick="window.location.href='vendor-profile.html'">
-Setup Store Profile
-</button>
+<h2>Dream Team Market</h2>
 
-</div>
+<p>Vendor Dashboard</p>
+
+</header>
+
 
 
 <div class="container">
@@ -73,30 +84,37 @@ Setup Store Profile
 
 <div class="card">
 
-<h2>Add Product</h2>
 
-<input id="name" placeholder="Product Name">
-
-<select id="category">
-<option>Electronics</option>
-<option>Fashion</option>
-<option>Food</option>
-<option>Services</option>
-<option>Others</option>
-</select>
+<h3>Add New Product</h3>
 
 
-<textarea id="description" placeholder="Product Description"></textarea>
+<div class="image-box">
 
-<input id="price" placeholder="Price">
+Product Image Space
 
-<input id="stock" placeholder="Stock Quantity">
-
-<input type="file" id="image" accept="image/*">
+</div>
 
 
-<button onclick="addProduct()">
-Add Product
+<input type="file" accept="image/*">
+
+
+
+<input type="text" placeholder="Product Name">
+
+
+
+<input type="number" placeholder="Price">
+
+
+
+<textarea placeholder="Product Description"></textarea>
+
+
+
+<button>
+
+Publish Product
+
 </button>
 
 
@@ -106,124 +124,23 @@ Add Product
 
 <div class="card">
 
-<h2>Your Products</h2>
 
-<div id="products"></div>
+<h3>Vendor Information</h3>
+
+
+<p>Store Name: Your Store</p>
+
+<p>Total Sales: ₦0</p>
+
+<p>Orders: 0</p>
 
 
 </div>
 
 
-</div>
-
-
-
-<script>
-
-
-function addProduct(){
-
-
-let file=document.getElementById("image").files[0];
-
-
-if(!file){
-alert("Select product image");
-return;
-}
-
-
-let reader=new FileReader();
-
-
-reader.onload=function(){
-
-
-let product={
-
-name:document.getElementById("name").value,
-
-category:document.getElementById("category").value,
-
-description:document.getElementById("description").value,
-
-price:document.getElementById("price").value,
-
-stock:document.getElementById("stock").value,
-
-image:reader.result
-
-};
-
-
-let products=JSON.parse(localStorage.getItem("products")) || [];
-
-
-products.push(product);
-
-
-localStorage.setItem("products",JSON.stringify(products));
-
-
-alert("Product Added");
-
-
-showProducts();
-
-
-};
-
-
-reader.readAsDataURL(file);
-
-
-}
-
-
-
-function showProducts(){
-
-
-let products=JSON.parse(localStorage.getItem("products")) || [];
-
-
-let output="";
-
-
-products.forEach(function(p){
-
-
-output+=`
-
-<div class="product">
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<p>Category: ${p.category}</p>
-
-<p>Price: ₦${p.price}</p>
-
-<p>Stock: ${p.stock}</p>
 
 </div>
 
-`;
-
-});
-
-
-document.getElementById("products").innerHTML=output;
-
-
-}
-
-
-showProducts();
-
-
-</script>
 
 
 </body>
