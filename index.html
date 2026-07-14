@@ -1,225 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dream Team Market</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Team Market</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+<style>
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body {background:#f4f6f9;}
 
-    body {
-      background: #f4f6f9;
-    }
+/* NAV */
+nav {
+  background:#111;
+  padding:10px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+nav button {
+  border:none;
+  background:#222;
+  color:white;
+  padding:10px 15px;
+  border-radius:20px;
+  cursor:pointer;
+}
+nav button:hover {background:#ff9800;}
 
-    /* NAVBAR */
-    nav {
-      background: #111;
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
+/* PAGE */
+.page {display:none;padding:20px;}
+#home {display:block;}
 
-    nav button {
-      background: transparent;
-      border: 2px solid #fff;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+/* HERO */
+.hero {
+  background:linear-gradient(135deg,#111,#444);
+  color:white;
+  text-align:center;
+  padding:60px 20px;
+}
+.hero h1 {font-size:28px;}
+.hero button {
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  background:orange;
+  color:white;
+  border-radius:20px;
+}
 
-    nav button:hover {
-      background: #ff9800;
-      border-color: #ff9800;
-    }
+/* CARDS */
+.cards {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-top:20px;
+}
+.card {
+  background:white;
+  padding:20px;
+  width:90%;
+  max-width:250px;
+  border-radius:10px;
+  box-shadow:0 5px 10px rgba(0,0,0,0.1);
+  text-align:center;
+}
 
-    /* PAGE */
-    .page {
-      display: none;
-    }
+/* FORM */
+.form-box {
+  background:white;
+  padding:20px;
+  max-width:320px;
+  margin:auto;
+  border-radius:10px;
+  box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+input {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+.btn {
+  width:100%;
+  padding:10px;
+  border:none;
+  background:black;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+.btn:hover {background:orange;}
+.msg {margin-top:10px;font-size:14px;color:green;}
 
-    #home {
-      display: block;
-    }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #111, #444);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .hero button {
-      padding: 12px 25px;
-      border: none;
-      background: #ff9800;
-      color: white;
-      border-radius: 25px;
-      cursor: pointer;
-    }
-
-    /* FEATURES */
-    .features {
-      padding: 50px 20px;
-      text-align: center;
-    }
-
-    .features h2 {
-      margin-bottom: 30px;
-    }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      width: 250px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-
-    /* AUTH FORMS */
-    .auth {
-      display: flex;
-      justify-content: center;
-      padding: 60px 20px;
-    }
-
-    .form-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      width: 300px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    .form-box h2 {
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button.submit {
-      width: 100%;
-      padding: 12px;
-      background: #111;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button.submit:hover {
-      background: #ff9800;
-    }
-
-  </style>
+/* DASHBOARD */
+.dashboard {
+  text-align:center;
+}
+</style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav>
   <button onclick="showPage('home')">Home</button>
   <button onclick="showPage('login')">Login</button>
   <button onclick="showPage('register')">Register</button>
+  <button onclick="showPage('dashboard')">Dashboard</button>
 </nav>
 
 <!-- HOME -->
 <div id="home" class="page">
-
   <div class="hero">
     <h1>Dream Team Market</h1>
-    <p>Buy and sell anything, anytime 🚀</p>
+    <p>Modern marketplace 🚀</p>
     <button onclick="showPage('register')">Get Started</button>
   </div>
 
-  <div class="features">
-    <h2>Why Choose Us</h2>
-
-    <div class="cards">
-      <div class="card">
-        <h3>🛒 Easy Shopping</h3>
-        <p>Browse and buy products easily</p>
-      </div>
-
-      <div class="card">
-        <h3>🔒 Secure</h3>
-        <p>Your data is protected</p>
-      </div>
-
-      <div class="card">
-        <h3>⚡ Fast Delivery</h3>
-        <p>Quick and reliable service</p>
-      </div>
-    </div>
+  <div class="cards">
+    <div class="card">🛒 Easy Shopping</div>
+    <div class="card">🔒 Secure</div>
+    <div class="card">⚡ Fast Delivery</div>
   </div>
-
 </div>
 
 <!-- LOGIN -->
 <div id="login" class="page">
-  <div class="auth">
-    <div class="form-box">
-      <h2>Login</h2>
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Password">
-      <button class="submit">Login</button>
-    </div>
+  <div class="form-box">
+    <h2>Login</h2>
+    <input id="loginEmail" type="email" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button class="btn" onclick="login()">Login</button>
+    <div id="loginMsg" class="msg"></div>
   </div>
 </div>
 
 <!-- REGISTER -->
 <div id="register" class="page">
-  <div class="auth">
-    <div class="form-box">
-      <h2>Create Account</h2>
-      <input type="text" placeholder="Name">
-      <input type="email" placeholder="Email">
-      <input type="password" placeholder="Password">
-      <button class="submit">Register</button>
-    </div>
+  <div class="form-box">
+    <h2>Register</h2>
+    <input id="regName" type="text" placeholder="Name">
+    <input id="regEmail" type="email" placeholder="Email">
+    <input id="regPassword" type="password" placeholder="Password">
+    <button class="btn" onclick="register()">Register</button>
+    <div id="regMsg" class="msg"></div>
   </div>
 </div>
 
-<!-- SCRIPT -->
+<!-- DASHBOARD -->
+<div id="dashboard" class="page">
+  <div class="dashboard">
+    <h2>Welcome</h2>
+    <p id="userInfo"></p>
+    <button class="btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
 <script>
+// NAVIGATION
 function showPage(page) {
   document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
   document.getElementById(page).style.display = 'block';
+}
+
+// REGISTER
+function register() {
+  let name = document.getElementById("regName").value;
+  let email = document.getElementById("regEmail").value;
+  let pass = document.getElementById("regPassword").value;
+
+  if (!name || !email || !pass) {
+    document.getElementById("regMsg").innerText = "Fill all fields";
+    return;
+  }
+
+  let user = {name, email, pass};
+  localStorage.setItem("user", JSON.stringify(user));
+
+  document.getElementById("regMsg").innerText = "Registered successfully!";
+}
+
+// LOGIN
+function login() {
+  let email = document.getElementById("loginEmail").value;
+  let pass = document.getElementById("loginPassword").value;
+
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    document.getElementById("loginMsg").innerText = "No user found";
+    return;
+  }
+
+  if (email === user.email && pass === user.pass) {
+    localStorage.setItem("loggedIn", "true");
+    showDashboard();
+  } else {
+    document.getElementById("loginMsg").innerText = "Invalid details";
+  }
+}
+
+// SHOW DASHBOARD
+function showDashboard() {
+  let user = JSON.parse(localStorage.getItem("user"));
+  document.getElementById("userInfo").innerText = "Hello, " + user.name;
+  showPage("dashboard");
+}
+
+// LOGOUT
+function logout() {
+  localStorage.removeItem("loggedIn");
+  showPage("home");
+}
+
+// AUTO LOGIN
+window.onload = function() {
+  if (localStorage.getItem("loggedIn") === "true") {
+    showDashboard();
+  } else {
+    showPage("home");
+  }
 }
 </script>
 
