@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Register - Dream Team Market</title>
+<title>Create Account - Dream Team Market</title>
 
 <style>
 body{
-    font-family:Arial;
-    background:#f4f4f4;
+font-family:Arial;
+background:#f5f5f5;
+padding:20px;
 }
 
 .box{
-    width:90%;
-    max-width:400px;
-    background:white;
-    margin:40px auto;
-    padding:25px;
-    border-radius:10px;
+background:white;
+padding:25px;
+border-radius:10px;
+max-width:400px;
+margin:auto;
+box-shadow:0 2px 8px #ccc;
 }
 
-input, select{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
 }
 
 button{
-    width:100%;
-    padding:12px;
-    background:#0d6efd;
-    color:white;
-    border:none;
-    border-radius:5px;
-}
-
-a{
-    color:#0d6efd;
-    text-decoration:none;
+background:#0b8f4d;
+color:white;
+border:0;
+padding:12px;
+width:100%;
+border-radius:5px;
 }
 </style>
 
@@ -47,30 +43,55 @@ a{
 
 <h2>Create Account</h2>
 
-<input type="text" placeholder="Full Name">
+<input id="name" placeholder="Full Name">
 
-<input type="email" placeholder="Email Address">
+<input id="email" placeholder="Email">
 
-<input type="password" placeholder="Password">
+<input id="password" type="password" placeholder="Password">
 
 
-<select>
-<option>Select Account Type</option>
-<option>Customer</option>
-<option>Vendor</option>
+<select id="type">
+
+<option value="customer">Customer</option>
+
+<option value="vendor">Vendor</option>
+
 </select>
 
 
-<button>Create Account</button>
-
-
-<p>
-Already have an account?
-<a href="login.html">Login</a>
-</p>
-
+<button onclick="register()">Register</button>
 
 </div>
+
+
+<script>
+
+function register(){
+
+let user={
+
+name:document.getElementById("name").value,
+
+email:document.getElementById("email").value,
+
+password:document.getElementById("password").value,
+
+type:document.getElementById("type").value
+
+};
+
+
+localStorage.setItem("account",JSON.stringify(user));
+
+
+alert("Account Created Successfully");
+
+
+window.location.href="login.html";
+
+}
+
+</script>
 
 </body>
 </html>
