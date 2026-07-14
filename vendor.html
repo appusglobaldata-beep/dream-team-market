@@ -28,7 +28,7 @@ header{
 input{
     width:100%;
     padding:10px;
-    margin:10px 0;
+    margin:8px 0;
 }
 
 button{
@@ -39,8 +39,10 @@ button{
     border-radius:5px;
 }
 
-a{
-    color:#008000;
+.product{
+    border:1px solid #ddd;
+    padding:15px;
+    margin:10px 0;
 }
 
 </style>
@@ -50,8 +52,11 @@ a{
 <body>
 
 <header>
+
 <h1>Vendor Dashboard</h1>
+
 <p>Dream Team Market</p>
+
 </header>
 
 
@@ -59,31 +64,58 @@ a{
 
 <h2>Add Product</h2>
 
-<input type="text" placeholder="Product Name">
+<input id="name" placeholder="Product Name">
 
-<input type="number" placeholder="Product Price">
+<input id="price" placeholder="Product Price">
 
-<input type="text" placeholder="Product Image">
-
-<button>Add Product</button>
+<button onclick="addProduct()">Add Product</button>
 
 </div>
+
 
 
 <div class="box">
 
 <h2>Your Products</h2>
 
+<div id="products">
+
 <p>No products added yet.</p>
 
 </div>
 
-
-<div class="box">
-
-<a href="index.html">Back Home</a>
-
 </div>
+
+
+<script>
+
+function addProduct(){
+
+let name=document.getElementById("name").value;
+
+let price=document.getElementById("price").value;
+
+
+if(name && price){
+
+document.getElementById("products").innerHTML +=
+
+"<div class='product'><h3>"+name+"</h3><p>Price: ₦"+price+"</p></div>";
+
+document.getElementById("name").value="";
+
+document.getElementById("price").value="";
+
+
+}else{
+
+alert("Enter product details");
+
+}
+
+}
+
+</script>
 
 
 </body>
