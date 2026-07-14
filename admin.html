@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Admin Dashboard - Dream Team Market</title>
+<title>Dream Team Market - Admin</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
 body{
 font-family:Arial;
-background:#f5f5f5;
 margin:0;
+background:#f5f5f5;
 }
 
-.header{
-background:#0b8f4d;
+header{
+background:#0b7a3d;
 color:white;
 padding:20px;
-font-size:25px;
+text-align:center;
 }
 
 .container{
@@ -26,9 +29,9 @@ padding:20px;
 .card{
 background:white;
 padding:20px;
-margin:15px 0;
+margin-bottom:15px;
 border-radius:10px;
-box-shadow:0 2px 8px #ccc;
+box-shadow:0 2px 5px #ccc;
 }
 
 </style>
@@ -39,9 +42,14 @@ box-shadow:0 2px 8px #ccc;
 <body>
 
 
-<div class="header">
-Dream Team Market Admin
-</div>
+<header>
+
+<h2>Dream Team Market</h2>
+
+<p>Admin Dashboard</p>
+
+</header>
+
 
 
 <div class="container">
@@ -49,7 +57,7 @@ Dream Team Market Admin
 
 <div class="card">
 
-<h2>Users</h2>
+<h3>Users</h3>
 
 <p id="users">0</p>
 
@@ -59,7 +67,7 @@ Dream Team Market Admin
 
 <div class="card">
 
-<h2>Products</h2>
+<h3>Products</h3>
 
 <p id="products">0</p>
 
@@ -69,19 +77,9 @@ Dream Team Market Admin
 
 <div class="card">
 
-<h2>Orders</h2>
+<h3>Orders</h3>
 
-<p id="orders">0</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>Platform Sales</h2>
-
-<p id="sales">₦0</p>
+<p>0</p>
 
 </div>
 
@@ -94,39 +92,23 @@ Dream Team Market Admin
 <script>
 
 
-let account = localStorage.getItem("account");
+let user = localStorage.getItem("user");
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 
-
-document.getElementById("users").innerHTML = account ? "1" : "0";
+document.getElementById("users").innerHTML = user ? "1" : "0";
 
 
 document.getElementById("products").innerHTML = products.length;
 
 
-document.getElementById("orders").innerHTML = orders.length;
-
-
-
-let total=0;
-
-
-orders.forEach(function(o){
-
-total += Number(o.price);
-
-});
-
-
-document.getElementById("sales").innerHTML="₦"+total;
-
 
 </script>
 
 
+
 </body>
+
 </html>
