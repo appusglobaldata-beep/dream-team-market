@@ -1,65 +1,162 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Customer - Dream Team Market</title>
+<title>Dream Team Market</title>
 
 <style>
+
 body{
-    font-family:Arial;
-    margin:0;
-    background:#f5f5f5;
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
 }
 
 .header{
-    background:#0b8f4d;
-    color:white;
-    padding:20px;
-    font-size:24px;
+background:#0b8f4d;
+color:white;
+padding:20px;
+font-size:24px;
 }
 
 .container{
-    padding:20px;
+padding:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
 .product{
-    background:white;
-    padding:20px;
-    margin:15px 0;
-    border-radius:10px;
-    box-shadow:0 2px 8px #ccc;
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 2px 8px #ccc;
+}
+
+.product img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.price{
+color:#0b8f4d;
+font-size:20px;
+font-weight:bold;
 }
 
 button{
-    background:#0b8f4d;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:5px;
+background:#0b8f4d;
+color:white;
+border:0;
+padding:12px;
+width:100%;
+border-radius:5px;
 }
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="header">
 Dream Team Market
 </div>
 
+
 <div class="container">
 
-<h2>Available Products</h2>
+<h2>All Products</h2>
+
+<div class="grid" id="products"></div>
+
+</div>
+
+
+
+<script>
+
+
+function loadProducts(){
+
+
+let products=JSON.parse(localStorage.getItem("products")) || [];
+
+
+let output="";
+
+
+if(products.length==0){
+
+output="<h3>No products available</h3>";
+
+}else{
+
+
+products.forEach(function(p){
+
+
+output+=`
 
 <div class="product">
-<h3>Product Name</h3>
-<p>Price: ₦0</p>
-<p>Vendor: Dream Team Vendor</p>
 
-<button>Buy Now</button>
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p><b>Category:</b> ${p.category}</p>
+
+<p>${p.description}</p>
+
+<p class="price">₦${p.price}</p>
+
+<p>Available Stock: ${p.stock}</p>
+
+
+<button onclick="buyProduct('${p.name}','${p.price}')">
+Buy Now
+</button>
+
 
 </div>
 
-</div>
+`;
+
+
+});
+
+
+}
+
+
+document.getElementById("products").innerHTML=output;
+
+
+}
+
+
+
+function buyProduct(name,price){
+
+localStorage.setItem("buyName",name);
+localStorage.setItem("buyPrice",price);
+
+window.location.href="payment.html";
+
+}
+
+
+loadProducts();
+
+
+</script>
+
 
 </body>
 </html>
