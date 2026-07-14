@@ -1,97 +1,123 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Create Account - Dream Team Market</title>
+
+<title>Dream Team Market - Register</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <style>
+
 body{
 font-family:Arial;
 background:#f5f5f5;
-padding:20px;
+margin:0;
 }
+
 
 .box{
+
 background:white;
-padding:25px;
-border-radius:10px;
+width:90%;
 max-width:400px;
-margin:auto;
-box-shadow:0 2px 8px #ccc;
+margin:50px auto;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 5px #ccc;
+
 }
 
-input,select{
+
+input, select{
+
 width:100%;
 padding:12px;
-margin:10px 0;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+
 }
+
 
 button{
-background:#0b8f4d;
-color:white;
-border:0;
-padding:12px;
+
 width:100%;
+padding:12px;
+background:#0b7a3d;
+color:white;
+border:none;
 border-radius:5px;
+font-size:16px;
+
 }
+
+
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="box">
 
-<h2>Create Account</h2>
 
-<input id="name" placeholder="Full Name">
+<h2>Dream Team Market</h2>
 
-<input id="email" placeholder="Email">
-
-<input id="password" type="password" placeholder="Password">
+<h3>Create Account</h3>
 
 
-<select id="type">
+<input type="text" placeholder="Full Name">
 
-<option value="customer">Customer</option>
 
-<option value="vendor">Vendor</option>
+<input type="email" placeholder="Email">
+
+
+<input type="password" placeholder="Password">
+
+
+<select>
+
+<option>Select Account Type</option>
+
+<option>Customer</option>
+
+<option>Vendor</option>
 
 </select>
 
 
-<button onclick="register()">Register</button>
+
+<button onclick="register()">
+
+Create Account
+
+</button>
+
 
 </div>
 
 
+
+
 <script>
+
 
 function register(){
 
-let user={
-
-name:document.getElementById("name").value,
-
-email:document.getElementById("email").value,
-
-password:document.getElementById("password").value,
-
-type:document.getElementById("type").value
-
-};
-
-
-localStorage.setItem("account",JSON.stringify(user));
-
-
-alert("Account Created Successfully");
-
+alert("Account Created Successfully!");
 
 window.location.href="login.html";
 
 }
 
+
 </script>
 
+
 </body>
+
 </html>
