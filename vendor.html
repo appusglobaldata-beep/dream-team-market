@@ -26,12 +26,15 @@ background:white;
 padding:20px;
 margin:15px 0;
 border-radius:10px;
+box-shadow:0 2px 8px #ccc;
 }
 
-input{
+input,textarea,select{
 width:100%;
 padding:12px;
 margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
@@ -42,9 +45,14 @@ padding:12px 20px;
 border-radius:5px;
 }
 
-img{
-width:100px;
-height:100px;
+.product{
+border-bottom:1px solid #ddd;
+padding:10px;
+}
+
+.product img{
+width:120px;
+height:120px;
 object-fit:cover;
 border-radius:10px;
 }
@@ -58,31 +66,48 @@ border-radius:10px;
 Dream Team Market - Vendor
 </div>
 
+
 <div class="container">
 
 <div class="card">
 
-<h2>Add Product</h2>
+<h2>Add New Product</h2>
 
 <input id="name" placeholder="Product Name">
 
+<select id="category">
+<option>Electronics</option>
+<option>Fashion</option>
+<option>Food</option>
+<option>Services</option>
+<option>Others</option>
+</select>
+
+<textarea id="description" placeholder="Product Description"></textarea>
+
 <input id="price" placeholder="Price">
 
+<input id="stock" placeholder="Stock Quantity">
+
 <input type="file" id="image" accept="image/*">
+
 
 <button onclick="addProduct()">Add Product</button>
 
 </div>
 
+
 <div class="card">
 
-<h3>Your Products</h3>
+<h2>Your Products</h2>
 
 <div id="products"></div>
 
 </div>
 
+
 </div>
+
 
 
 <script>
@@ -92,18 +117,30 @@ function addProduct(){
 let file=document.getElementById("image").files[0];
 
 if(!file){
-alert("Please select an image");
+alert("Select product image");
 return;
 }
 
+
 let reader=new FileReader();
+
 
 reader.onload=function(){
 
 let product={
+
 name:document.getElementById("name").value,
+
+category:document.getElementById("category").value,
+
+description:document.getElementById("description").value,
+
 price:document.getElementById("price").value,
+
+stock:document.getElementById("stock").value,
+
 image:reader.result
+
 };
 
 
@@ -113,15 +150,18 @@ products.push(product);
 
 localStorage.setItem("products",JSON.stringify(products));
 
+
 alert("Product Added");
 
 showProducts();
 
 };
 
+
 reader.readAsDataURL(file);
 
 }
+
 
 
 function showProducts(){
@@ -130,27 +170,41 @@ let products=JSON.parse(localStorage.getItem("products")) || [];
 
 let output="";
 
+
 products.forEach(function(p){
 
 output+=`
 
-<div>
+<div class="product">
+
 <img src="${p.image}">
-<p>${p.name}</p>
-<p>₦${p.price}</p>
+
+<h3>${p.name}</h3>
+
+<p>Category: ${p.category}</p>
+
+<p>${p.description}</p>
+
+<p>Price: ₦${p.price}</p>
+
+<p>Stock: ${p.stock}</p>
+
 </div>
 
 `;
 
 });
 
+
 document.getElementById("products").innerHTML=output;
 
 }
 
+
 showProducts();
 
 </script>
+
 
 </body>
 </html>
