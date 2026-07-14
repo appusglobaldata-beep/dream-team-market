@@ -2,155 +2,48 @@
 <html>
 
 <head>
-
-<title>Dream Team Market - Login</title>
-
+<title>Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <style>
-
-body{
-font-family:Arial;
-background:#f5f5f5;
-margin:0;
-}
-
-.box{
-
-background:white;
-width:90%;
-max-width:400px;
-margin:50px auto;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 5px #ccc;
-
-}
-
-input{
-
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #ccc;
-border-radius:5px;
-
-}
-
-button{
-
-width:100%;
-padding:12px;
-background:#0b7a3d;
-color:white;
-border:none;
-border-radius:5px;
-
-}
-
+body{font-family:Arial;background:#f5f5f5;margin:0;}
+.box{background:white;padding:20px;margin:50px;border-radius:10px;}
+input,button{width:100%;padding:10px;margin:5px 0;}
+button{background:#0b7a3d;color:white;border:none;}
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="box">
 
+<h2>Login / Register</h2>
 
-<h2>Dream Team Market</h2>
+<input id="username" placeholder="Enter username">
 
-<h3>Login</h3>
-
-
-<input id="email" type="email" placeholder="Email">
-
-
-<input id="password" type="password" placeholder="Password">
-
-
-<button onclick="login()">
-
-Login
-
-</button>
-
-
+<button onclick="login()">Continue</button>
 
 </div>
 
-
-
-
 <script>
-
 
 function login(){
 
+let name = document.getElementById("username").value;
 
-let user = JSON.parse(localStorage.getItem("user"));
-
-
-
-if(!user){
-
-alert("Account not found. Please register first.");
-
-window.location.href="register.html";
-
+if(name === ""){
+alert("Enter username");
 return;
-
 }
 
+localStorage.setItem("currentUser", name);
 
-
-let email=document.getElementById("email").value;
-
-let password=document.getElementById("password").value;
-
-
-
-if(email==user.email && password==user.password){
-
-
-localStorage.setItem("loggedIn","yes");
-
-
-
-if(user.type=="Vendor"){
-
-window.location.href="vendor.html";
+window.location = "customer.html";
 
 }
-
-else{
-
-window.location.href="customer.html";
-
-}
-
-
-
-}
-
-else{
-
-
-alert("Wrong email or password");
-
-
-}
-
-
-
-}
-
 
 </script>
 
-
 </body>
-
 </html>
