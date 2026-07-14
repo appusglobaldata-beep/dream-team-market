@@ -47,7 +47,9 @@ border:none;
 
 <script>
 
-let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+let currentUser = localStorage.getItem("currentUser");
+
+let wishlist = JSON.parse(localStorage.getItem("wishlist_" + currentUser)) || [];
 
 function render(){
 
@@ -78,7 +80,7 @@ function removeItem(index){
 
 wishlist.splice(index,1);
 
-localStorage.setItem("wishlist", JSON.stringify(wishlist));
+localStorage.setItem("wishlist_" + currentUser, JSON.stringify(wishlist));
 
 render();
 
