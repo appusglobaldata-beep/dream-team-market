@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dream Team Market - Notifications</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f5f5;
+margin:0;
+}
+
+header{
+background:#0b7a3d;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.box{
+
+background:white;
+margin:20px;
+padding:20px;
+border-radius:10px;
+
+}
+
+.notification{
+
+background:#eee;
+padding:12px;
+margin-bottom:10px;
+border-radius:5px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h2>Dream Team Market</h2>
+
+<p>Notifications</p>
+
+</header>
+
+
+
+<div class="box" id="notifications">
+
+</div>
+
+
+
+<script>
+
+
+let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+
+
+let box=document.getElementById("notifications");
+
+
+
+if(notifications.length==0){
+
+box.innerHTML="<h3>No Notifications</h3>";
+
+}
+
+
+
+notifications.forEach(function(note){
+
+
+box.innerHTML += `
+
+<div class="notification">
+
+${note}
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+</script>
+
+
+</body>
+
+</html>
