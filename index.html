@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Team Market</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      background: #2563eb;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(to right, #2563eb, #1e40af);
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      padding: 12px 20px;
+      background: white;
+      color: #2563eb;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .hero button:hover {
+      background: #e5e7eb;
+    }
+
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111827;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Dream Team Market</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Create Account</a>
+    <a href="vendor.html">Vendor</a>
+    <a href="customer.html">Customer</a>
+    <a href="payment.html">Payment</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Buy & Sell Digital Products Securely</h2>
+  <p>Multi-vendor marketplace with escrow protection</p>
+  <button onclick="location.href='register.html'">Get Started</button>
+</section>
+
+<section class="section">
+  <h2>Features</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Secure Payments</h3>
+      <p>Pay safely using Paystack integration.</p>
+    </div>
+
+    <div class="card">
+      <h3>Vendor System</h3>
+      <p>Anyone can become a seller and list products.</p>
+    </div>
+
+    <div class="card">
+      <h3>Fast Delivery</h3>
+      <p>Instant access to digital products after purchase.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Dream Team Market. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
