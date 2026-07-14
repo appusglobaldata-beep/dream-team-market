@@ -45,6 +45,7 @@ border-radius:5px;
 }
 
 .bottom-menu{
+
 position:fixed;
 bottom:0;
 left:0;
@@ -53,13 +54,16 @@ background:#0b7a3d;
 display:flex;
 justify-content:space-around;
 padding:10px 0;
+
 }
 
 .bottom-menu a{
+
 color:white;
 text-decoration:none;
 text-align:center;
 font-size:13px;
+
 }
 
 </style>
@@ -80,30 +84,54 @@ font-size:13px;
 
 
 
+
 <div class="container">
 
 
-<h3>Your Cart: <span id="count">0</span></h3>
+<h3>
+Cart Items: <span id="count">0</span>
+</h3>
+
 
 
 <div id="products"></div>
 
 
+
 </div>
+
 
 
 
 <div class="bottom-menu">
 
-<a href="index.html">🏠<br>Home</a>
 
-<a href="customer.html">🛒<br>Shop</a>
+<a href="index.html">
+🏠<br>
+Home
+</a>
 
-<a href="vendor.html">🏪<br>Vendor</a>
 
-<a href="profile.html">👤<br>Profile</a>
+<a href="customer.html">
+🛒<br>
+Shop
+</a>
+
+
+<a href="cart.html">
+🛍️<br>
+Cart
+</a>
+
+
+<a href="profile.html">
+👤<br>
+Profile
+</a>
+
 
 </div>
+
 
 
 
@@ -113,15 +141,21 @@ font-size:13px;
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
-let box=document.getElementById("products");
-
-
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 
+let box = document.getElementById("products");
 
-document.getElementById("count").innerHTML=cart.length;
+
+document.getElementById("count").innerHTML = cart.length;
+
+
+
+if(products.length == 0){
+
+box.innerHTML="<h3>No Products Available</h3>";
+
+}
 
 
 
@@ -130,15 +164,21 @@ products.forEach(function(product,index){
 
 box.innerHTML += `
 
+
 <div class="product">
+
 
 <h3>${product.name}</h3>
 
+
 <p>Vendor: ${product.store || "Vendor"}</p>
+
 
 <p>Price: ₦${product.price}</p>
 
+
 <p>${product.description}</p>
+
 
 
 <button onclick="addCart(${index})">
@@ -148,13 +188,14 @@ Add To Cart
 </button>
 
 
+
 </div>
+
 
 `;
 
-
-
 });
+
 
 
 
