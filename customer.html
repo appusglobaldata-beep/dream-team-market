@@ -56,7 +56,8 @@ cursor:pointer;
 <header>
 <h2>Marketplace</h2>
 <a href="cart.html" style="color:white;">🛒 Cart</a> |
-<a href="wishlist.html" style="color:white;">❤️ Wishlist</a>
+<a href="wishlist.html" style="color:white;">❤️ Wishlist</a> |
+<button onclick="logout()">Logout</button>
 </header>
 
 <div class="container">
@@ -76,11 +77,17 @@ cursor:pointer;
 
 <script>
 
+let currentUser = localStorage.getItem("currentUser");
+
+if(!currentUser){
+window.location = "login.html";
+}
+
 let allProducts = JSON.parse(localStorage.getItem("products")) || [];
 let currentList = [...allProducts];
 
 function getWishlist(){
-return JSON.parse(localStorage.getItem("wishlist")) || [];
+return JSON.parse(localStorage.getItem("wishlist_" + currentUser)) || [];
 }
 
 function isSaved(product){
@@ -101,7 +108,7 @@ wishlist.splice(exists,1);
 wishlist.push(product);
 }
 
-localStorage.setItem("wishlist", JSON.stringify(wishlist));
+localStorage.setItem("wishlist_" + currentUser, JSON.stringify(wishlist));
 
 displayProducts(currentList);
 }
@@ -158,14 +165,19 @@ window.location = "product.html";
 
 function addToCart(index){
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart_" + currentUser)) || [];
 
 cart.push(currentList[index]);
 
-localStorage.setItem("cart", JSON.stringify(cart));
+localStorage.setItem("cart_" + currentUser, JSON.stringify(cart));
 
 alert("Added to cart");
 
+}
+
+function logout(){
+localStorage.removeItem("currentUser");
+window.location = "login.html";
 }
 
 displayProducts(allProducts);
