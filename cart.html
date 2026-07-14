@@ -32,14 +32,6 @@ background:red;
 color:white;
 border:none;
 }
-
-.total{
-background:white;
-padding:15px;
-border-radius:10px;
-font-weight:bold;
-text-align:center;
-}
 </style>
 
 </head>
@@ -53,11 +45,21 @@ text-align:center;
 
 <div class="container" id="cart"></div>
 
-<div class="container total" id="total"></div>
+<div class="container" id="total"></div>
+
+<div class="container">
+<a href="checkout.html">
+<button style="background:#0b7a3d;">Proceed to Checkout</button>
+</a>
+</div>
 
 <script>
 
 let currentUser = localStorage.getItem("currentUser");
+
+if(!currentUser){
+window.location = "login.html";
+}
 
 let cart = JSON.parse(localStorage.getItem("cart_" + currentUser)) || [];
 
@@ -83,7 +85,7 @@ box.innerHTML += `
 
 });
 
-document.getElementById("total").innerHTML = "Total: ₦" + total;
+document.getElementById("total").innerHTML = "<b>Total: ₦" + total + "</b>";
 
 }
 
