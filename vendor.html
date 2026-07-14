@@ -1,75 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dream Team Market - Customer</title>
+<title>Vendor Dashboard - Dream Team Market</title>
 
 <style>
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f5f5f5;
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
 }
 
-header{
-    background:#0b7a3d;
-    color:white;
-    padding:20px;
-    text-align:center;
+.header{
+background:#0b8f3c;
+color:white;
+padding:20px;
+font-size:25px;
 }
 
 .container{
-    padding:20px;
+padding:20px;
 }
 
-.product{
-    background:white;
-    padding:20px;
-    margin-bottom:15px;
-    border-radius:10px;
-    box-shadow:0 2px 5px #ccc;
+.card{
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 2px 8px #ccc;
 }
 
 button{
-    background:#0b7a3d;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:5px;
+background:#0b8f3c;
+color:white;
+border:none;
+padding:12px;
+border-radius:5px;
 }
+
+.menu{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.box{
+background:white;
+padding:20px;
+width:200px;
+border-radius:10px;
+box-shadow:0 2px 8px #ccc;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<header>
-<h1>Dream Team Market</h1>
-<p>Customer Store</p>
-</header>
+<div class="header">
+Dream Team Market - Vendor Dashboard
+</div>
 
 
 <div class="container">
 
-<div class="product">
-<h2>Available Products</h2>
-<p>Browse products from different vendors.</p>
+<h2>Welcome Vendor</h2>
+
+
+<div class="menu">
+
+<div class="box">
+<h3>Products</h3>
+<p>0 Products</p>
 </div>
 
 
-<div class="product">
-<h3>Product Name</h3>
-<p>Price: ₦0</p>
-<button>Buy Now</button>
+<div class="box">
+<h3>Orders</h3>
+<p>0 Orders</p>
 </div>
 
 
-<div class="product">
-<h3>Your Orders</h3>
-<p>No orders yet.</p>
+<div class="box">
+<h3>Earnings</h3>
+<p>₦0</p>
+</div>
+
+
+<div class="box">
+<h3>Customers</h3>
+<p>0 Customers</p>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>Add New Product</h3>
+
+<input type="text" placeholder="Product Name"><br><br>
+
+<input type="number" placeholder="Price"><br><br>
+
+<button>Add Product</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Recent Orders</h3>
+
+<p>No orders yet</p>
+
 </div>
 
 
 </div>
+
 
 </body>
 </html>
