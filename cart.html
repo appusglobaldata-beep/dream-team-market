@@ -3,10 +3,9 @@
 
 <head>
 
-<title>Dream Team Market - Cart</title>
+<title>Dream Team Market - Chat</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
 <style>
 
@@ -14,7 +13,6 @@ body{
 font-family:Arial;
 margin:0;
 background:#f5f5f5;
-padding-bottom:70px;
 }
 
 header{
@@ -24,56 +22,44 @@ padding:20px;
 text-align:center;
 }
 
-.container{
-padding:20px;
-}
-
-.item{
+.chat-box{
 
 background:white;
+margin:20px;
 padding:15px;
-margin-bottom:15px;
+height:350px;
+overflow:auto;
 border-radius:10px;
-box-shadow:0 2px 5px #ccc;
+
+}
+
+.message{
+
+background:#eee;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+
+}
+
+input{
+
+width:75%;
+padding:12px;
 
 }
 
 button{
 
+width:20%;
+padding:12px;
 background:#0b7a3d;
 color:white;
 border:none;
-padding:12px;
-width:100%;
-border-radius:5px;
-
-}
-
-
-.bottom-menu{
-
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#0b7a3d;
-display:flex;
-justify-content:space-around;
-padding:10px 0;
-
-}
-
-
-.bottom-menu a{
-
-color:white;
-text-decoration:none;
-text-align:center;
 
 }
 
 </style>
-
 
 </head>
 
@@ -85,48 +71,31 @@ text-align:center;
 
 <h2>Dream Team Market</h2>
 
-<p>My Cart</p>
+<p>Chat With Vendor</p>
 
 </header>
 
 
 
-<div class="container">
+
+<div class="chat-box" id="chat">
+
+</div>
 
 
-<div id="cartItems"></div>
 
 
-<h3 id="total"></h3>
+<div style="padding:20px;">
 
+<input id="message" placeholder="Write message">
 
-<button onclick="checkout()">
+<button onclick="sendMessage()">
 
-Checkout
+Send
 
 </button>
 
-
-
 </div>
-
-
-
-
-<div class="bottom-menu">
-
-
-<a href="index.html">🏠<br>Home</a>
-
-<a href="customer.html">🛒<br>Shop</a>
-
-<a href="cart.html">🛍️<br>Cart</a>
-
-<a href="profile.html">👤<br>Profile</a>
-
-
-</div>
-
 
 
 
@@ -134,60 +103,70 @@ Checkout
 <script>
 
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let messages = JSON.parse(localStorage.getItem("messages")) || [];
 
-
-let box=document.getElementById("cartItems");
-
-
-let total=0;
+let chat=document.getElementById("chat");
 
 
 
-if(cart.length==0){
-
-box.innerHTML="<h3>Your cart is empty</h3>";
-
-}
+function showMessages(){
 
 
-
-cart.forEach(function(item){
-
-
-total += Number(item.price);
+chat.innerHTML="";
 
 
+messages.forEach(function(msg){
 
-box.innerHTML += `
 
+chat.innerHTML += `
 
-<div class="item">
+<div class="message">
 
-<h3>${item.name}</h3>
-
-<p>Price: ₦${item.price}</p>
+${msg}
 
 </div>
 
-
 `;
-
-
 
 });
 
 
-
-document.getElementById("total").innerHTML="Total: ₦"+total;
-
+}
 
 
-function checkout(){
 
-window.location.href="payment.html";
+showMessages();
+
+
+
+
+
+function sendMessage(){
+
+
+let text=document.getElementById("message").value;
+
+
+if(text=="") return;
+
+
+
+messages.push(text);
+
+
+
+localStorage.setItem("messages",JSON.stringify(messages));
+
+
+document.getElementById("message").value="";
+
+
+showMessages();
+
+
 
 }
+
 
 
 </script>
