@@ -5,8 +5,18 @@
   <title>Dream Team Market</title>
 
   <style>
-    body { font-family: Arial; margin: 0; text-align: center; }
-    nav { background: black; padding: 15px; }
+    body {
+      font-family: Arial;
+      margin: 0;
+      text-align: center;
+      background: #f5f5f5;
+    }
+
+    nav {
+      background: black;
+      padding: 15px;
+    }
+
     nav button {
       margin: 5px;
       padding: 10px 15px;
@@ -15,9 +25,22 @@
       border: 1px solid white;
       cursor: pointer;
     }
-    .page { display: none; padding: 40px; }
-    input { padding: 10px; margin: 5px; width: 200px; }
-    button.submit { background: black; color: white; border: none; }
+
+    .page {
+      padding: 40px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 5px;
+      width: 200px;
+    }
+
+    button.submit {
+      background: black;
+      color: white;
+      border: none;
+    }
   </style>
 </head>
 
@@ -29,18 +52,22 @@
   <button onclick="showPage('register')">Register</button>
 </nav>
 
+<!-- HOME (VISIBLE BY DEFAULT) -->
 <div id="home" class="page">
   <h1>Welcome to Dream Team Market</h1>
+  <p>Your homepage is now fixed ✅</p>
 </div>
 
-<div id="login" class="page">
+<!-- LOGIN -->
+<div id="login" class="page" style="display:none;">
   <h2>Login</h2>
   <input type="email" placeholder="Email"><br>
   <input type="password" placeholder="Password"><br>
   <button class="submit">Login</button>
 </div>
 
-<div id="register" class="page">
+<!-- REGISTER -->
+<div id="register" class="page" style="display:none;">
   <h2>Register</h2>
   <input type="text" placeholder="Name"><br>
   <input type="email" placeholder="Email"><br>
@@ -50,12 +77,12 @@
 
 <script>
 function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-  document.getElementById(page).style.display = 'block';
-}
+  document.getElementById("home").style.display = "none";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("register").style.display = "none";
 
-// LOAD DEFAULT PAGE
-showPage('home');
+  document.getElementById(page).style.display = "block";
+}
 </script>
 
 </body>
