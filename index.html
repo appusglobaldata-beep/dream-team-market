@@ -7,160 +7,212 @@
 
 <style>
 body {
-  margin: 0;
+  margin:0;
   font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
+  background:#0f172a;
+  color:white;
 }
 
-header {
-  background: #020617;
-  padding: 15px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
+/* NAVBAR */
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  background:#020617;
 }
 
-.container {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
+nav button {
+  background:#2563eb;
+  border:none;
+  padding:8px 12px;
+  color:white;
+  cursor:pointer;
 }
 
-.card {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
+/* PAGES */
+.page { display:none; padding:20px; }
+.active { display:block; }
 
+/* FORM */
 input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 5px;
+  display:block;
+  margin:10px 0;
+  padding:10px;
+  width:100%;
 }
 
 button {
-  width: 100%;
-  padding: 10px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding:10px;
+  margin-top:10px;
 }
 
-button:hover {
-  background: #2563eb;
+/* PRODUCTS */
+.product {
+  background:#1e293b;
+  padding:10px;
+  margin:10px 0;
 }
 
-.link {
-  text-align: center;
-  margin-top: 10px;
-  cursor: pointer;
-  color: #60a5fa;
-}
-
-.hidden {
-  display: none;
-}
 </style>
 </head>
 
 <body>
 
-<header>Dream Team</header>
-
-<div class="container">
-
-  <!-- HOME -->
-  <div id="home" class="card">
-    <h2>Welcome to Dream Team</h2>
-    <button onclick="showPage('loginPage')">Login</button>
-    <button onclick="showPage('registerPage')">Register</button>
+<nav>
+  <h2>Dream Team</h2>
+  <div>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('login')">Login</button>
+    <button onclick="showPage('register')">Register</button>
+    <button onclick="showPage('cart')">Cart</button>
   </div>
+</nav>
 
-  <!-- REGISTER -->
-  <div id="registerPage" class="card hidden">
-    <h2>Register</h2>
-    <input id="regName" placeholder="Full Name">
-    <input id="regEmail" placeholder="Email">
-    <input id="regPass" type="password" placeholder="Password">
-    <button onclick="register()">Register</button>
-    <div class="link" onclick="showPage('loginPage')">Already have account? Login</div>
+<!-- HOME -->
+<div id="home" class="page active">
+  <h1>Welcome to Dream Team</h1>
+  <p>Professional Marketplace</p>
+
+  <div id="products"></div>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="page">
+  <h2>Login</h2>
+  <input id="loginEmail" placeholder="Email">
+  <input id="loginPass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="page">
+  <h2>Register</h2>
+  <input id="regName" placeholder="Name">
+  <input id="regEmail" placeholder="Email">
+  <input id="regPass" type="password" placeholder="Password">
+
+  <select id="role">
+    <option value="customer">Customer</option>
+    <option value="vendor">Vendor</option>
+  </select>
+
+  <button onclick="register()">Register</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="page">
+  <h2 id="userInfo"></h2>
+  <p id="roleInfo"></p>
+
+  <div id="vendorArea" style="display:none;">
+    <h3>Add Product</h3>
+    <input id="prodName" placeholder="Product name">
+    <button onclick="addProduct()">Add</button>
   </div>
+</div>
 
-  <!-- LOGIN -->
-  <div id="loginPage" class="card hidden">
-    <h2>Login</h2>
-    <input id="loginEmail" placeholder="Email">
-    <input id="loginPass" type="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-    <div class="link" onclick="showPage('registerPage')">No account? Register</div>
-  </div>
-
-  <!-- DASHBOARD -->
-  <div id="dashboard" class="card hidden">
-    <h2 id="userInfo">Welcome</h2>
-    <button onclick="logout()">Logout</button>
-  </div>
-
+<!-- CART -->
+<div id="cart" class="page">
+  <h2>Cart</h2>
+  <div id="cartItems"></div>
 </div>
 
 <script>
-// SWITCH PAGES
-function showPage(pageId) {
-  let pages = ["home", "loginPage", "registerPage", "dashboard"];
-  pages.forEach(p => {
-    document.getElementById(p).classList.add("hidden");
-  });
-  document.getElementById(pageId).classList.remove("hidden");
+
+// NAVIGATION
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
 // REGISTER
-function register() {
-  let name = document.getElementById("regName").value;
-  let email = document.getElementById("regEmail").value;
-  let pass = document.getElementById("regPass").value;
+function register(){
+  let user = {
+    name: regName.value,
+    email: regEmail.value,
+    pass: regPass.value,
+    role: role.value
+  };
 
-  if (!name || !email || !pass) {
-    alert("Fill all fields");
-    return;
-  }
-
-  let user = { name, email, pass };
   localStorage.setItem("user", JSON.stringify(user));
+  alert("Registered!");
 
-  alert("Registered successfully!");
-  showPage("loginPage");
+  showPage("login");
 }
 
 // LOGIN
-function login() {
-  let email = document.getElementById("loginEmail").value;
-  let pass = document.getElementById("loginPass").value;
-
+function login(){
   let user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user) {
-    alert("No user found");
+  if(!user){
+    alert("No user");
     return;
   }
 
-  if (email === user.email && pass === user.pass) {
-    document.getElementById("userInfo").innerText = "Welcome, " + user.name;
+  if(loginEmail.value === user.email && loginPass.value === user.pass){
+    alert("Login success");
+
+    userInfo.innerText = "Welcome " + user.name;
+    roleInfo.innerText = "Role: " + user.role;
+
+    if(user.role === "vendor"){
+      vendorArea.style.display = "block";
+    }
+
     showPage("dashboard");
   } else {
-    alert("Wrong email or password");
+    alert("Wrong details");
   }
 }
 
-// LOGOUT
-function logout() {
-  showPage("home");
+// PRODUCTS
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+function addProduct(){
+  let p = prodName.value;
+  if(!p) return;
+
+  products.push(p);
+  localStorage.setItem("products", JSON.stringify(products));
+  renderProducts();
 }
+
+function renderProducts(){
+  let container = document.getElementById("products");
+  container.innerHTML = "";
+
+  products.forEach((p,i)=>{
+    container.innerHTML += `
+      <div class="product">
+        <h3>${p}</h3>
+        <button onclick="addToCart('${p}')">Add to Cart</button>
+      </div>
+    `;
+  });
+}
+
+// CART
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(item){
+  cart.push(item);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Added to cart");
+}
+
+function renderCart(){
+  let c = document.getElementById("cartItems");
+  c.innerHTML = "";
+
+  cart.forEach(i=>{
+    c.innerHTML += `<p>${i}</p>`;
+  });
+}
+
+// LOAD
+renderProducts();
+renderCart();
+
 </script>
 
 </body>
