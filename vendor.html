@@ -5,7 +5,7 @@
 
 <style>
 body{
-    font-family: Arial;
+    font-family:Arial;
     background:#f4f4f4;
     margin:0;
 }
@@ -21,20 +21,22 @@ header{
     padding:20px;
 }
 
-.card{
+.box{
     background:white;
     padding:20px;
-    margin-bottom:20px;
     border-radius:10px;
+    margin-bottom:20px;
 }
 
-input, button{
+input{
     width:100%;
     padding:12px;
     margin:8px 0;
 }
 
 button{
+    width:100%;
+    padding:12px;
     background:#0d6efd;
     color:white;
     border:none;
@@ -43,8 +45,8 @@ button{
 
 .product{
     background:#eee;
-    padding:10px;
-    margin:10px 0;
+    padding:15px;
+    margin-top:10px;
     border-radius:5px;
 }
 </style>
@@ -61,41 +63,65 @@ button{
 
 <div class="container">
 
-<div class="card">
+
+<div class="box">
+
 <h2>Add Product</h2>
 
-<input type="text" placeholder="Product Name">
+<input id="name" placeholder="Product Name">
 
-<input type="number" placeholder="Price (NGN)">
+<input id="price" placeholder="Price">
 
-<input type="text" placeholder="Product Image Link">
+<input id="image" placeholder="Image Link">
 
-<button>Add Product</button>
+
+<button onclick="addProduct()">
+Add Product
+</button>
 
 </div>
 
 
-<div class="card">
+
+<div class="box">
 
 <h2>Your Products</h2>
 
+<div id="products">
+No products added.
+</div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+function addProduct(){
+
+let name=document.getElementById("name").value;
+let price=document.getElementById("price").value;
+let image=document.getElementById("image").value;
+
+
+let product=
+`
 <div class="product">
-No products added yet.
+<h3>${name}</h3>
+<p>Price: ₦${price}</p>
+<img src="${image}" width="100%">
 </div>
-
-</div>
-
-
-<div class="card">
-
-<h2>Earnings</h2>
-
-<h3>₦0</h3>
-
-</div>
+`;
 
 
-</div>
+document.getElementById("products").innerHTML=product;
+
+}
+
+</script>
+
 
 </body>
 </html>
