@@ -21,6 +21,7 @@ gap:10px;
 background:white;
 padding:10px;
 border-radius:10px;
+position:relative;
 }
 
 img{
@@ -38,6 +39,14 @@ background:#0b7a3d;
 color:white;
 border:none;
 }
+
+.heart{
+position:absolute;
+top:8px;
+right:8px;
+font-size:20px;
+cursor:pointer;
+}
 </style>
 
 </head>
@@ -46,7 +55,8 @@ border:none;
 
 <header>
 <h2>Marketplace</h2>
-<a href="cart.html" style="color:white;">🛒 View Cart</a>
+<a href="cart.html" style="color:white;">🛒 Cart</a> |
+<a href="wishlist.html" style="color:white;">❤️ Wishlist</a>
 </header>
 
 <div class="container">
@@ -69,6 +79,33 @@ border:none;
 let allProducts = JSON.parse(localStorage.getItem("products")) || [];
 let currentList = [...allProducts];
 
+function getWishlist(){
+return JSON.parse(localStorage.getItem("wishlist")) || [];
+}
+
+function isSaved(product){
+let wishlist = getWishlist();
+return wishlist.some(p => p.name === product.name && p.price === product.price);
+}
+
+function toggleWishlist(index){
+
+let wishlist = getWishlist();
+let product = currentList[index];
+
+let exists = wishlist.findIndex(p => p.name === product.name && p.price === product.price);
+
+if(exists > -1){
+wishlist.splice(exists,1);
+}else{
+wishlist.push(product);
+}
+
+localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+displayProducts(currentList);
+}
+
 function displayProducts(list){
 
 currentList = list;
@@ -78,8 +115,13 @@ container.innerHTML = "";
 
 list.forEach((product,index)=>{
 
+let saved = isSaved(product) ? "❤️" : "🤍";
+
 container.innerHTML += `
 <div class="card">
+
+<div class="heart" onclick="toggleWishlist(${index})">${saved}</div>
+
 <img src="${product.images[0]}">
 
 <h4>${product.name}</h4>
@@ -87,6 +129,7 @@ container.innerHTML += `
 
 <button onclick="view(${index})">View</button>
 <button onclick="addToCart(${index})">Add to Cart</button>
+
 </div>
 `;
 
