@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Vendor Store - Dream Team Market</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
+}
+
+.header{
+background:#0b8f4d;
+color:white;
+padding:20px;
+text-align:center;
+font-size:25px;
+}
+
+.container{
+padding:20px;
+}
+
+.profile{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 2px 8px #ccc;
+}
+
+.profile img{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.product{
+background:white;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+box-shadow:0 2px 8px #ccc;
+}
+
+.product img{
+width:150px;
+height:150px;
+object-fit:cover;
+border-radius:10px;
+}
+
+button{
+background:#0b8f4d;
+color:white;
+border:0;
+padding:12px;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+Dream Team Market Store
+</div>
+
+
+<div class="container">
+
+
+<div class="profile">
+
+<img id="logo">
+
+<h2 id="storeName">Vendor Store</h2>
+
+<p id="location"></p>
+
+<p id="phone"></p>
+
+
+</div>
+
+
+
+<h2>Products</h2>
+
+
+<div id="products"></div>
+
+
+
+</div>
+
+
+
+<script>
+
+
+let store=JSON.parse(localStorage.getItem("store")) || {};
+
+
+document.getElementById("storeName").innerHTML =
+store.name || "Vendor Store";
+
+
+document.getElementById("location").innerHTML =
+store.location || "";
+
+
+document.getElementById("phone").innerHTML =
+store.phone || "";
+
+
+if(store.logo){
+
+document.getElementById("logo").src=store.logo;
+
+}
+
+
+
+let products=JSON.parse(localStorage.getItem("products")) || [];
+
+
+let output="";
+
+
+products.forEach(p=>{
+
+output+=`
+
+<div class="product">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>₦${p.price}</p>
+
+<button>Buy Now</button>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("products").innerHTML=output;
+
+
+</script>
+
+
+</body>
+</html>
