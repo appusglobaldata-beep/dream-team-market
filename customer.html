@@ -1,92 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Customer Dashboard - Dream Team Market</title>
+let handler = PaystackPop.setup({
 
-<style>
-body{
-    font-family:Arial;
-    background:#f5f5f5;
-    margin:0;
+key: 'pk_test_e5155a948fb02b41f36d131f41e7d19a22b9ed22',
+
+email: 'customer@email.com',
+
+amount: 100000,
+
+currency: 'NGN',
+
+callback: function(response){
+
+alert("Payment Successful. Reference: " + response.reference);
+
+},
+
+onClose: function(){
+
+alert("Payment cancelled");
+
 }
 
-header{
-    background:#008000;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-.box{
-    background:white;
-    margin:20px;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px #ccc;
-}
-
-.product{
-    border:1px solid #ddd;
-    padding:15px;
-    margin:10px 0;
-    border-radius:5px;
-}
-
-button{
-    background:#008000;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:5px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<h1>Customer Dashboard</h1>
-
-<p>Dream Team Market</p>
-
-</header>
-
-
-<div class="box">
-
-<h2>Available Products</h2>
-
-
-<div id="products">
-
-<div class="product">
-
-<h3>Sample Product</h3>
-
-<p>Price: ₦1000</p>
-
-<button>Buy Now</button>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-<div class="box">
-
-<h2>My Orders</h2>
-
-<p>No orders yet.</p>
-
-</div>
-
-
-</body>
-</html>
+});
