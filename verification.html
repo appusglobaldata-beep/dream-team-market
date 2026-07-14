@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dream Team Market - Verification</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f5f5;
+margin:0;
+}
+
+header{
+background:#0b7a3d;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.box{
+
+background:white;
+margin:20px;
+padding:20px;
+border-radius:10px;
+
+}
+
+input,textarea{
+
+width:100%;
+padding:12px;
+margin:8px 0;
+
+}
+
+
+button{
+
+width:100%;
+padding:12px;
+background:#0b7a3d;
+color:white;
+border:none;
+border-radius:5px;
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h2>Dream Team Market</h2>
+
+<p>Vendor Verification</p>
+
+</header>
+
+
+
+
+<div class="box">
+
+
+<h3>Apply for Verified Badge</h3>
+
+
+<input id="store" placeholder="Store Name">
+
+
+<input id="phone" placeholder="Phone Number">
+
+
+<textarea id="info" placeholder="Tell us about your business"></textarea>
+
+
+
+<button onclick="applyVerification()">
+
+Submit Request
+
+</button>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+function applyVerification(){
+
+
+let requests = JSON.parse(localStorage.getItem("verification")) || [];
+
+
+
+requests.push({
+
+store:document.getElementById("store").value,
+
+phone:document.getElementById("phone").value,
+
+info:document.getElementById("info").value,
+
+status:"Pending"
+
+});
+
+
+
+localStorage.setItem("verification",JSON.stringify(requests));
+
+
+
+alert("Verification Request Submitted");
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
