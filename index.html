@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Dream Team Market</title>
 
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <style>
@@ -43,30 +42,85 @@
       border-color: #ff9800;
     }
 
-    /* PAGES */
+    /* PAGE */
     .page {
       display: none;
-      padding: 60px 20px;
-      text-align: center;
     }
 
     #home {
       display: block;
     }
 
-    h1, h2 {
-      margin-bottom: 20px;
-      color: #333;
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #111, #444);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
     }
 
-    /* CARD STYLE */
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      padding: 12px 25px;
+      border: none;
+      background: #ff9800;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .features h2 {
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
     .card {
       background: white;
-      max-width: 350px;
-      margin: auto;
+      padding: 20px;
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* AUTH FORMS */
+    .auth {
+      display: flex;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .form-box {
+      background: white;
       padding: 30px;
       border-radius: 12px;
+      width: 300px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .form-box h2 {
+      margin-bottom: 20px;
     }
 
     input {
@@ -75,14 +129,9 @@
       margin: 10px 0;
       border-radius: 8px;
       border: 1px solid #ccc;
-      outline: none;
     }
 
-    input:focus {
-      border-color: #ff9800;
-    }
-
-    .btn {
+    button.submit {
       width: 100%;
       padding: 12px;
       background: #111;
@@ -91,23 +140,10 @@
       border-radius: 8px;
       cursor: pointer;
       margin-top: 10px;
-      transition: 0.3s;
     }
 
-    .btn:hover {
+    button.submit:hover {
       background: #ff9800;
-    }
-
-    /* HERO */
-    .hero {
-      padding: 80px 20px;
-      background: linear-gradient(to right, #111, #333);
-      color: white;
-    }
-
-    .hero h1 {
-      color: white;
-      font-size: 32px;
     }
 
   </style>
@@ -124,30 +160,58 @@
 
 <!-- HOME -->
 <div id="home" class="page">
+
   <div class="hero">
     <h1>Dream Team Market</h1>
-    <p>Your modern online marketplace 🚀</p>
+    <p>Buy and sell anything, anytime 🚀</p>
+    <button onclick="showPage('register')">Get Started</button>
   </div>
+
+  <div class="features">
+    <h2>Why Choose Us</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3>🛒 Easy Shopping</h3>
+        <p>Browse and buy products easily</p>
+      </div>
+
+      <div class="card">
+        <h3>🔒 Secure</h3>
+        <p>Your data is protected</p>
+      </div>
+
+      <div class="card">
+        <h3>⚡ Fast Delivery</h3>
+        <p>Quick and reliable service</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- LOGIN -->
 <div id="login" class="page">
-  <div class="card">
-    <h2>Login</h2>
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
-    <button class="btn">Login</button>
+  <div class="auth">
+    <div class="form-box">
+      <h2>Login</h2>
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button class="submit">Login</button>
+    </div>
   </div>
 </div>
 
 <!-- REGISTER -->
 <div id="register" class="page">
-  <div class="card">
-    <h2>Create Account</h2>
-    <input type="text" placeholder="Name">
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
-    <button class="btn">Register</button>
+  <div class="auth">
+    <div class="form-box">
+      <h2>Create Account</h2>
+      <input type="text" placeholder="Name">
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button class="submit">Register</button>
+    </div>
   </div>
 </div>
 
