@@ -1,282 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>Vendor Dashboard - Dream Team Market</title>
 
 <style>
-
 body{
-margin:0;
-font-family:Arial;
-background:#f5f5f5;
+    font-family: Arial;
+    background:#f4f4f4;
+    margin:0;
 }
 
 header{
-background:#008000;
-color:white;
-padding:25px;
-text-align:center;
+    background:#0d6efd;
+    color:white;
+    padding:20px;
+    text-align:center;
 }
 
 .container{
-padding:25px;
+    padding:20px;
 }
 
 .card{
-background:white;
-padding:25px;
-margin-bottom:20px;
-border-radius:15px;
-box-shadow:0 5px 15px #ddd;
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
 }
 
-input{
-width:100%;
-padding:12px;
-margin:10px 0;
+input, button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
 }
 
 button{
-background:#008000;
-color:white;
-border:none;
-padding:12px 20px;
-border-radius:5px;
-cursor:pointer;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:5px;
 }
 
-.product,.order{
-border:1px solid #ddd;
-padding:15px;
-margin:10px 0;
-border-radius:10px;
+.product{
+    background:#eee;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
 }
-
-.product img{
-width:120px;
-height:120px;
-object-fit:cover;
-border-radius:10px;
-}
-
 </style>
 
 </head>
 
-
 <body>
 
-
 <header>
-
-<h1>Vendor Dashboard</h1>
-
-<p>Dream Team Market Seller Center</p>
-
+<h1>Dream Team Market</h1>
+<p>Vendor Dashboard</p>
 </header>
-
 
 
 <div class="container">
 
-
-
 <div class="card">
-
 <h2>Add Product</h2>
 
+<input type="text" placeholder="Product Name">
 
-<input id="name" placeholder="Product Name">
+<input type="number" placeholder="Price (NGN)">
 
+<input type="text" placeholder="Product Image Link">
 
-<input id="price" placeholder="Product Price">
-
-
-<input type="file" id="image" accept="image/*">
-
-
-<button onclick="addProduct()">
-Upload Product
-</button>
-
+<button>Add Product</button>
 
 </div>
-
-
 
 
 <div class="card">
 
 <h2>Your Products</h2>
 
-<div id="list"></div>
-
+<div class="product">
+No products added yet.
 </div>
 
-
-
+</div>
 
 
 <div class="card">
 
-<h2>Customer Orders</h2>
+<h2>Earnings</h2>
 
-<div id="orders"></div>
-
-</div>
-
-
+<h3>₦0</h3>
 
 </div>
 
 
-
-
-
-<script>
-
-
-function addProduct(){
-
-
-let name=document.getElementById("name").value;
-
-let price=document.getElementById("price").value;
-
-let image=document.getElementById("image").files[0];
-
-
-if(name=="" || price=="" || !image){
-
-alert("Complete product information");
-
-return;
-
-}
-
-
-
-let reader=new FileReader();
-
-
-reader.onload=function(e){
-
-
-let products=JSON.parse(localStorage.getItem("products")) || [];
-
-
-products.push({
-
-name:name,
-
-price:price,
-
-image:e.target.result
-
-});
-
-
-localStorage.setItem("products",JSON.stringify(products));
-
-
-showProducts();
-
-
-};
-
-
-reader.readAsDataURL(image);
-
-
-}
-
-
-
-
-
-function showProducts(){
-
-
-let products=JSON.parse(localStorage.getItem("products")) || [];
-
-let output="";
-
-
-products.forEach(function(p){
-
-
-output += `
-
-<div class="product">
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<p>Price: ₦${p.price}</p>
-
 </div>
-
-`;
-
-
-});
-
-
-document.getElementById("list").innerHTML=output;
-
-
-}
-
-
-
-
-
-function showOrders(){
-
-
-let orders=JSON.parse(localStorage.getItem("orders")) || [];
-
-let output="";
-
-
-orders.forEach(function(o){
-
-
-output += `
-
-<div class="order">
-
-<h3>${o.product}</h3>
-
-<p>Price: ₦${o.price}</p>
-
-<p>Status: ${o.status}</p>
-
-</div>
-
-`;
-
-
-});
-
-
-document.getElementById("orders").innerHTML=output;
-
-
-}
-
-
-
-showProducts();
-
-showOrders();
-
-
-</script>
-
-
 
 </body>
 </html>
