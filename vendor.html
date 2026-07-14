@@ -21,20 +21,24 @@ font-size:24px;
 padding:20px;
 }
 
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+
 .card{
 background:white;
 padding:20px;
-margin:15px 0;
 border-radius:10px;
 box-shadow:0 2px 8px #ccc;
+margin-bottom:20px;
 }
 
 input,textarea,select{
 width:100%;
 padding:12px;
 margin:8px 0;
-border:1px solid #ccc;
-border-radius:5px;
 }
 
 button{
@@ -45,14 +49,9 @@ padding:12px 20px;
 border-radius:5px;
 }
 
-.product{
-border-bottom:1px solid #ddd;
-padding:10px;
-}
-
 .product img{
-width:120px;
-height:120px;
+width:100px;
+height:100px;
 object-fit:cover;
 border-radius:10px;
 }
@@ -69,9 +68,34 @@ Dream Team Market - Vendor
 
 <div class="container">
 
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Products</h3>
+<h2 id="totalProducts">0</h2>
+</div>
+
+
+<div class="card">
+<h3>Total Sales</h3>
+<h2>₦0</h2>
+</div>
+
+
+<div class="card">
+<h3>Orders</h3>
+<h2>0</h2>
+</div>
+
+
+</div>
+
+
+
 <div class="card">
 
-<h2>Add New Product</h2>
+<h2>Add Product</h2>
 
 <input id="name" placeholder="Product Name">
 
@@ -80,21 +104,23 @@ Dream Team Market - Vendor
 <option>Fashion</option>
 <option>Food</option>
 <option>Services</option>
-<option>Others</option>
 </select>
 
-<textarea id="description" placeholder="Product Description"></textarea>
+
+<textarea id="description" placeholder="Description"></textarea>
 
 <input id="price" placeholder="Price">
 
 <input id="stock" placeholder="Stock Quantity">
 
-<input type="file" id="image" accept="image/*">
+<input type="file" id="image">
 
 
 <button onclick="addProduct()">Add Product</button>
 
+
 </div>
+
 
 
 <div class="card">
@@ -102,6 +128,7 @@ Dream Team Market - Vendor
 <h2>Your Products</h2>
 
 <div id="products"></div>
+
 
 </div>
 
@@ -112,14 +139,10 @@ Dream Team Market - Vendor
 
 <script>
 
+
 function addProduct(){
 
 let file=document.getElementById("image").files[0];
-
-if(!file){
-alert("Select product image");
-return;
-}
 
 
 let reader=new FileReader();
@@ -127,17 +150,18 @@ let reader=new FileReader();
 
 reader.onload=function(){
 
+
 let product={
 
-name:document.getElementById("name").value,
+name:name.value,
 
-category:document.getElementById("category").value,
+category:category.value,
 
-description:document.getElementById("description").value,
+description:description.value,
 
-price:document.getElementById("price").value,
+price:price.value,
 
-stock:document.getElementById("stock").value,
+stock:stock.value,
 
 image:reader.result
 
@@ -148,6 +172,7 @@ let products=JSON.parse(localStorage.getItem("products")) || [];
 
 products.push(product);
 
+
 localStorage.setItem("products",JSON.stringify(products));
 
 
@@ -155,10 +180,12 @@ alert("Product Added");
 
 showProducts();
 
+
 };
 
 
 reader.readAsDataURL(file);
+
 
 }
 
@@ -166,12 +193,18 @@ reader.readAsDataURL(file);
 
 function showProducts(){
 
+
 let products=JSON.parse(localStorage.getItem("products")) || [];
+
+
+document.getElementById("totalProducts").innerHTML=products.length;
+
 
 let output="";
 
 
-products.forEach(function(p){
+products.forEach(p=>{
+
 
 output+=`
 
@@ -181,11 +214,7 @@ output+=`
 
 <h3>${p.name}</h3>
 
-<p>Category: ${p.category}</p>
-
-<p>${p.description}</p>
-
-<p>Price: ₦${p.price}</p>
+<p>₦${p.price}</p>
 
 <p>Stock: ${p.stock}</p>
 
@@ -193,15 +222,18 @@ output+=`
 
 `;
 
+
 });
 
 
 document.getElementById("products").innerHTML=output;
 
+
 }
 
 
 showProducts();
+
 
 </script>
 
