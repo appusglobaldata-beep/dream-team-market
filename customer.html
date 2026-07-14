@@ -2,200 +2,75 @@
 <html>
 
 <head>
-
 <title>Dream Team Market - Shop</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f5f5f5;
-padding-bottom:70px;
-}
-
-header{
-background:#0b7a3d;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-.container{
-padding:20px;
-}
-
-.product{
-background:white;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 5px #ccc;
-}
-
-button{
-background:#0b7a3d;
-color:white;
-border:none;
-padding:12px;
-width:100%;
-border-radius:5px;
-}
-
-.bottom-menu{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#0b7a3d;
-display:flex;
-justify-content:space-around;
-padding:10px;
-}
-
-.bottom-menu a{
-color:white;
-text-decoration:none;
-text-align:center;
-font-size:13px;
-}
-
+body{font-family:Arial;margin:0;background:#f5f5f5;}
+header{background:#0b7a3d;color:white;padding:20px;text-align:center;}
+.container{padding:20px;}
+.product{background:white;padding:15px;margin-bottom:15px;border-radius:10px;}
+img{width:100%;border-radius:10px;}
+button{width:100%;padding:10px;background:#0b7a3d;color:white;border:none;margin-top:5px;}
 </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
-<h2>Dream Team Market</h2>
-
-<p>Shop Products</p>
-
+<h2>Shop Products</h2>
 </header>
 
-
-
-<div class="container">
-
-<div id="products"></div>
-
-</div>
-
-
-
-<div class="bottom-menu">
-
-<a href="index.html">🏠<br>Home</a>
-
-<a href="customer.html">🛒<br>Shop</a>
-
-<a href="cart.html">🛍️<br>Cart</a>
-
-<a href="profile.html">👤<br>Profile</a>
-
-</div>
-
-
-
+<div class="container" id="products"></div>
 
 <script>
 
-
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
-
-let box=document.getElementById("products");
-
-
+let box = document.getElementById("products");
 
 products.forEach(function(product,index){
 
-
 box.innerHTML += `
-
 
 <div class="product">
 
+<img src="${product.image}">
 
 <h3>${product.name}</h3>
 
-
 <p>₦${product.price}</p>
-
 
 <p>${product.description}</p>
 
+<button onclick="viewProduct(${index})">View</button>
 
-
-<button onclick="viewProduct(${index})">
-
-View Product
-
-</button>
-
-
-
-<button onclick="addCart(${index})">
-
-Add To Cart
-
-</button>
-
-
+<button onclick="addCart(${index})">Add To Cart</button>
 
 </div>
 
-
 `;
-
-
 
 });
 
-
-
-
 function viewProduct(index){
-
-
-localStorage.setItem("selectedProduct",JSON.stringify(products[index]));
-
-
-window.location.href="product.html";
-
-
+localStorage.setItem("selectedProduct", JSON.stringify(products[index]));
+location.href="product.html";
 }
-
-
-
 
 function addCart(index){
 
-
-let cart=JSON.parse(localStorage.getItem("cart")) || [];
-
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 cart.push(products[index]);
 
+localStorage.setItem("cart", JSON.stringify(cart));
 
-localStorage.setItem("cart",JSON.stringify(cart));
-
-
-alert("Added to Cart");
-
+alert("Added to cart");
 
 }
 
-
-
 </script>
 
-
 </body>
-
 </html>
