@@ -1,123 +1,54 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<title>Dream Team Market - Register</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<style>
-
-body{
-font-family:Arial;
-background:#f5f5f5;
-margin:0;
-}
-
-
-.box{
-
-background:white;
-width:90%;
-max-width:400px;
-margin:50px auto;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 5px #ccc;
-
-}
-
-
-input, select{
-
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #ccc;
-border-radius:5px;
-
-}
-
-
-button{
-
-width:100%;
-padding:12px;
-background:#0b7a3d;
-color:white;
-border:none;
-border-radius:5px;
-font-size:16px;
-
-}
-
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="box">
-
-
-<h2>Dream Team Market</h2>
-
-<h3>Create Account</h3>
-
-
-<input type="text" placeholder="Full Name">
-
-
-<input type="email" placeholder="Email">
-
-
-<input type="password" placeholder="Password">
-
-
-<select>
-
-<option>Select Account Type</option>
-
-<option>Customer</option>
-
-<option>Vendor</option>
-
-</select>
-
-
-
-<button onclick="register()">
-
-Create Account
-
-</button>
-
-
-</div>
-
-
-
-
 <script>
-
 
 function register(){
 
+
+let name = document.querySelector('input[placeholder="Full Name"]').value;
+
+let email = document.querySelector('input[placeholder="Email"]').value;
+
+let password = document.querySelector('input[placeholder="Password"]').value;
+
+let type = document.querySelector('select').value;
+
+
+
+if(name=="" || email=="" || password=="" || type=="Select Account Type"){
+
+alert("Please fill all details");
+
+return;
+
+}
+
+
+
+let user = {
+
+name:name,
+
+email:email,
+
+password:password,
+
+type:type
+
+};
+
+
+
+localStorage.setItem("user", JSON.stringify(user));
+
+
+
 alert("Account Created Successfully!");
 
+
+
 window.location.href="login.html";
+
 
 }
 
 
 </script>
-
-
-</body>
-
-</html>
