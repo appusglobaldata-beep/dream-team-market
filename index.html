@@ -5,100 +5,14 @@
   <title>Dream Team Market</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    nav {
-      background: #222;
-      padding: 15px;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    nav a:hover {
-      color: orange;
-    }
-
-    .page {
-      padding: 40px;
-    }
-
-    input {
-      padding: 10px;
-      width: 250px;
+    body { font-family: Arial; margin: 0; text-align: center; }
+    nav { background: black; padding: 15px; }
+    nav button {
       margin: 5px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background: black;
+      padding: 10px 15px;
       color: white;
-      border: none;
+      background: transparent;
+      border: 1px solid white;
       cursor: pointer;
     }
-
-    button:hover {
-      background: orange;
-    }
-  </style>
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-<nav>
-  <a onclick="navigate('home')">Home</a>
-  <a onclick="navigate('login')">Login</a>
-  <a onclick="navigate('register')">Register</a>
-</nav>
-
-<!-- HOME -->
-<div id="home" class="page">
-  <h1>Welcome to Dream Team Market</h1>
-  <p>Your marketplace is now working 🎉</p>
-</div>
-
-<!-- LOGIN -->
-<div id="login" class="page" style="display:none;">
-  <h2>Login</h2>
-  <input type="email" placeholder="Email"><br>
-  <input type="password" placeholder="Password"><br>
-  <button onclick="alert('Login clicked')">Login</button>
-</div>
-
-<!-- REGISTER -->
-<div id="register" class="page" style="display:none;">
-  <h2>Register</h2>
-  <input type="text" placeholder="Name"><br>
-  <input type="email" placeholder="Email"><br>
-  <input type="password" placeholder="Password"><br>
-  <button onclick="alert('Register clicked')">Register</button>
-</div>
-
-<!-- SCRIPT -->
-<script>
-function navigate(page) {
-  document.querySelectorAll(".page").forEach(p => {
-    p.style.display = "none";
-  });
-
-  document.getElementById(page).style.display = "block";
-}
-
-window.onload = function () {
-  navigate("home");
-};
-</script>
-
-</body>
-</html>
+    .
