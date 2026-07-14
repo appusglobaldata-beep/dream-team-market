@@ -72,7 +72,7 @@ Dream Team Market
 
 <div class="container">
 
-<h2>All Products</h2>
+<h2>Products</h2>
 
 <div class="grid" id="products"></div>
 
@@ -92,14 +92,7 @@ let products=JSON.parse(localStorage.getItem("products")) || [];
 let output="";
 
 
-if(products.length==0){
-
-output="<h3>No products available</h3>";
-
-}else{
-
-
-products.forEach(function(p){
+products.forEach(function(p,index){
 
 
 output+=`
@@ -110,17 +103,19 @@ output+=`
 
 <h3>${p.name}</h3>
 
-<p><b>Category:</b> ${p.category}</p>
-
 <p>${p.description}</p>
+
+<p>Category: ${p.category}</p>
 
 <p class="price">₦${p.price}</p>
 
-<p>Available Stock: ${p.stock}</p>
+<p>Stock: ${p.stock}</p>
 
 
-<button onclick="buyProduct('${p.name}','${p.price}')">
+<button onclick="buy(${index})">
+
 Buy Now
+
 </button>
 
 
@@ -132,9 +127,6 @@ Buy Now
 });
 
 
-}
-
-
 document.getElementById("products").innerHTML=output;
 
 
@@ -142,14 +134,47 @@ document.getElementById("products").innerHTML=output;
 
 
 
-function buyProduct(name,price){
+function buy(index){
 
-localStorage.setItem("buyName",name);
-localStorage.setItem("buyPrice",price);
+
+let products=JSON.parse(localStorage.getItem("products")) || [];
+
+
+let p=products[index];
+
+
+let orders=JSON.parse(localStorage.getItem("orders")) || [];
+
+
+let order={
+
+product:p.name,
+
+price:p.price,
+
+customer:"Customer",
+
+status:"Pending"
+
+};
+
+
+orders.push(order);
+
+
+localStorage.setItem("orders",JSON.stringify(orders));
+
+
+localStorage.setItem("buyName",p.name);
+
+localStorage.setItem("buyPrice",p.price);
+
 
 window.location.href="payment.html";
 
+
 }
+
 
 
 loadProducts();
