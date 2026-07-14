@@ -3,149 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dream Team Market</title>
+<title>Dream Team</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #ffffff;
-  color: #333;
-}
-
-/* NAV */
-nav {
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-nav button {
-  padding: 10px 15px;
-  border: none;
-  background: #eee;
-  cursor: pointer;
-}
-
-nav button:hover {
-  background: #007bff;
+  background: #0f172a;
   color: white;
 }
 
-/* PAGE */
-.page {
-  display: none;
-  padding: 20px;
+header {
+  background: #020617;
+  padding: 15px;
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-#home {
-  display: block;
-}
-
-/* HERO */
-.hero {
-  padding: 50px 20px;
-  background: #f0f4ff;
-}
-
-.hero h1 {
-  font-size: 28px;
-}
-
-.hero button {
-  padding: 10px 20px;
-  margin-top: 10px;
-  background: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-/* FORM */
-.form-box {
-  max-width: 300px;
+.container {
+  max-width: 400px;
   margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 input {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
-  border: 1px solid #ccc;
+  border: none;
+  border-radius: 5px;
 }
 
-.btn {
+button {
   width: 100%;
   padding: 10px;
-  background: #007bff;
+  background: #3b82f6;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.msg {
+button:hover {
+  background: #2563eb;
+}
+
+.link {
+  text-align: center;
   margin-top: 10px;
-  font-size: 14px;
-  color: green;
+  cursor: pointer;
+  color: #60a5fa;
+}
+
+.hidden {
+  display: none;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <button onclick="showPage('home')">Home</button>
-  <button onclick="showPage('login')">Login</button>
-  <button onclick="showPage('register')">Register</button>
-</nav>
+<header>Dream Team</header>
 
-<!-- HOME -->
-<div id="home" class="page">
-  <div class="hero">
-    <h1>Dream Team Market</h1>
-    <p>Welcome to your marketplace</p>
-    <button onclick="showPage('register')">Start Now</button>
+<div class="container">
+
+  <!-- HOME -->
+  <div id="home" class="card">
+    <h2>Welcome to Dream Team</h2>
+    <button onclick="showPage('loginPage')">Login</button>
+    <button onclick="showPage('registerPage')">Register</button>
   </div>
-</div>
 
-<!-- REGISTER -->
-<div id="register" class="page">
-  <div class="form-box">
+  <!-- REGISTER -->
+  <div id="registerPage" class="card hidden">
     <h2>Register</h2>
-    <input id="regName" placeholder="Name">
+    <input id="regName" placeholder="Full Name">
     <input id="regEmail" placeholder="Email">
-    <input id="regPass" placeholder="Password">
-    <button class="btn" onclick="register()">Register</button>
-    <div id="regMsg" class="msg"></div>
+    <input id="regPass" type="password" placeholder="Password">
+    <button onclick="register()">Register</button>
+    <div class="link" onclick="showPage('loginPage')">Already have account? Login</div>
   </div>
-</div>
 
-<!-- LOGIN -->
-<div id="login" class="page">
-  <div class="form-box">
+  <!-- LOGIN -->
+  <div id="loginPage" class="card hidden">
     <h2>Login</h2>
     <input id="loginEmail" placeholder="Email">
-    <input id="loginPass" placeholder="Password">
-    <button class="btn" onclick="login()">Login</button>
-    <div id="loginMsg" class="msg"></div>
+    <input id="loginPass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <div class="link" onclick="showPage('registerPage')">No account? Register</div>
   </div>
-</div>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="page">
-  <h2>Dashboard</h2>
-  <p id="userInfo"></p>
-  <button onclick="logout()">Logout</button>
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="card hidden">
+    <h2 id="userInfo">Welcome</h2>
+    <button onclick="logout()">Logout</button>
+  </div>
+
 </div>
 
 <script>
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-  document.getElementById(page).style.display = 'block';
+// SWITCH PAGES
+function showPage(pageId) {
+  let pages = ["home", "loginPage", "registerPage", "dashboard"];
+  pages.forEach(p => {
+    document.getElementById(p).classList.add("hidden");
+  });
+  document.getElementById(pageId).classList.remove("hidden");
 }
 
 // REGISTER
@@ -155,18 +126,15 @@ function register() {
   let pass = document.getElementById("regPass").value;
 
   if (!name || !email || !pass) {
-    document.getElementById("regMsg").innerText = "Fill all fields";
+    alert("Fill all fields");
     return;
   }
 
-  let user = {name, email, pass};
+  let user = { name, email, pass };
   localStorage.setItem("user", JSON.stringify(user));
 
-  document.getElementById("regMsg").innerText = "Registered successfully!";
-
-  // GO TO DASHBOARD
-  document.getElementById("userInfo").innerText = "Hello, " + name;
-  showPage("dashboard");
+  alert("Registered successfully!");
+  showPage("loginPage");
 }
 
 // LOGIN
@@ -177,15 +145,15 @@ function login() {
   let user = JSON.parse(localStorage.getItem("user"));
 
   if (!user) {
-    document.getElementById("loginMsg").innerText = "No user found";
+    alert("No user found");
     return;
   }
 
   if (email === user.email && pass === user.pass) {
-    document.getElementById("userInfo").innerText = "Hello, " + user.name;
+    document.getElementById("userInfo").innerText = "Welcome, " + user.name;
     showPage("dashboard");
   } else {
-    document.getElementById("loginMsg").innerText = "Wrong details";
+    alert("Wrong email or password");
   }
 }
 
