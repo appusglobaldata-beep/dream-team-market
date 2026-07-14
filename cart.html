@@ -67,6 +67,18 @@ color:white;
 text-decoration:none;
 text-align:center;
 font-size:13px;
+position:relative;
+}
+
+#badge{
+position:absolute;
+top:-5px;
+right:8px;
+background:red;
+color:white;
+border-radius:50%;
+padding:3px 6px;
+font-size:10px;
 }
 
 </style>
@@ -107,7 +119,10 @@ font-size:13px;
 
 <a href="cart.html">🛍️<br>Cart</a>
 
-<a href="notifications.html">🔔<br>Alerts</a>
+<a href="notifications.html">
+🔔<br>Alerts
+<span id="badge">0</span>
+</a>
 
 </div>
 
@@ -116,12 +131,24 @@ font-size:13px;
 <script>
 
 
-// ✅ NOTIFICATION FUNCTION (BEST PLACE)
+// ✅ NOTIFICATION FUNCTION
 function addNotification(text) {
   let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
   notifications.push(text);
   localStorage.setItem("notifications", JSON.stringify(notifications));
 }
+
+
+// ✅ UPDATE BADGE
+function updateBadge(){
+  let notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+  let badge = document.getElementById("badge");
+  if(badge){
+    badge.innerText = notifications.length;
+  }
+}
+
+updateBadge();
 
 
 // LOAD CART
@@ -155,7 +182,7 @@ document.getElementById("total").innerText = "Total: ₦" + total;
 
 
 
-// CHECKOUT FUNCTION
+// CHECKOUT
 function checkout(){
 
 if(cart.length == 0){
@@ -164,7 +191,7 @@ return;
 }
 
 
-// SAVE ORDER
+// SAVE ORDERS
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
 cart.forEach(function(item){
@@ -181,7 +208,7 @@ status:"Pending"
 localStorage.setItem("orders", JSON.stringify(orders));
 
 
-// ✅ ADD NOTIFICATION HERE
+// ✅ ADD NOTIFICATION
 addNotification("🛍️ New order placed successfully");
 
 
