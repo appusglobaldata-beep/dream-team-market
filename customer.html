@@ -2,48 +2,105 @@
 <html>
 <head>
 
-<title>Customer Dashboard - Dream Team Market</title>
+<title>Marketplace - Dream Team Market</title>
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
 
 <style>
 
 body{
-    font-family:Arial;
-    background:#f5f5f5;
     margin:0;
+    font-family:Arial, sans-serif;
+    background:#f5f5f5;
 }
+
 
 header{
     background:#008000;
     color:white;
-    padding:20px;
+    padding:25px;
     text-align:center;
 }
 
-.box{
+
+nav{
     background:white;
-    margin:20px;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px #ccc;
+    padding:15px;
+    text-align:center;
 }
 
-.product{
-    border:1px solid #ddd;
-    padding:15px;
-    margin:10px 0;
-    border-radius:5px;
+
+nav a{
+    color:#008000;
+    text-decoration:none;
+    margin:10px;
+    font-weight:bold;
 }
+
+
+.container{
+    padding:25px;
+}
+
+
+
+.search{
+
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:5px;
+margin-bottom:20px;
+
+}
+
+
+
+.products{
+
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+
+}
+
+
+
+.card{
+
+background:white;
+width:280px;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px #ddd;
+
+}
+
+
+
+.card img{
+
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+
+}
+
+
 
 button{
-    background:#008000;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:5px;
-    cursor:pointer;
+
+background:#008000;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:5px;
+cursor:pointer;
+
 }
+
+
 
 </style>
 
@@ -53,65 +110,131 @@ button{
 <body>
 
 
+
 <header>
 
-<h1>Customer Dashboard</h1>
+<h1>Dream Team Market</h1>
 
-<p>Dream Team Market</p>
+<p>Find your favorite products</p>
 
 </header>
 
 
 
-<div class="box">
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="vendor.html">Sell Product</a>
+
+</nav>
+
+
+
+
+<div class="container">
+
+
+<input class="search" placeholder="Search products...">
+
+
 
 <h2>Available Products</h2>
 
 
-<div class="product">
 
-<h3>Sample Product</h3>
-
-<p>Price: ₦1000</p>
-
-
-<button onclick="payWithPaystack()">
-Buy Now
-</button>
-
+<div class="products" id="products">
 
 </div>
 
 
+
 </div>
+
 
 
 
 
 <script>
 
-function payWithPaystack(){
+
+
+function loadProducts(){
+
+
+let products=JSON.parse(localStorage.getItem("products")) || [];
+
+
+let output="";
+
+
+
+products.forEach(function(p){
+
+
+output += `
+
+<div class="card">
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<p>Price: ₦${p.price}</p>
+
+
+<button onclick="pay('${p.price}')">
+
+Buy Now
+
+</button>
+
+
+</div>
+
+`;
+
+
+});
+
+
+
+document.getElementById("products").innerHTML=output;
+
+
+
+}
+
+
+
+function pay(price){
+
 
 
 let handler = PaystackPop.setup({
 
+
 key: 'pk_test_e5155a948fb02b41f36d131f41e7d19a22b9ed22',
 
-email: 'customer@email.com',
 
-amount: 100000,
-
-currency: 'NGN',
+email:'customer@email.com',
 
 
-callback: function(response){
+amount: Number(price) * 100,
 
-alert("Payment Successful. Reference: " + response.reference);
+
+currency:'NGN',
+
+
+
+callback:function(response){
+
+alert("Payment Successful: "+response.reference);
 
 },
 
 
-onClose: function(){
+onClose:function(){
 
 alert("Payment cancelled");
 
@@ -121,15 +244,22 @@ alert("Payment cancelled");
 });
 
 
+
 handler.openIframe();
 
 
+
 }
+
+
+
+loadProducts();
+
+
 
 </script>
 
 
 
 </body>
-
 </html>
