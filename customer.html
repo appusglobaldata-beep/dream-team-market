@@ -2,16 +2,48 @@
 <html>
 
 <head>
-<title>Shop</title>
+<title>Marketplace</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{font-family:Arial;margin:0;background:#f5f5f5;}
-header{background:#0b7a3d;color:white;padding:20px;text-align:center;}
-.container{padding:20px;}
-.product{background:white;padding:15px;margin-bottom:15px;border-radius:10px;}
-img{width:100%;border-radius:10px;}
-button{width:100%;padding:10px;background:#0b7a3d;color:white;border:none;margin-top:5px;}
+body{font-family:Arial;background:#f5f5f5;margin:0;}
+
+header{
+background:#0b7a3d;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+.container{padding:15px;}
+
+input,select{
+width:100%;
+padding:10px;
+margin:5px 0;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.card{
+background:white;
+padding:10px;
+border-radius:10px;
+cursor:pointer;
+}
+
+img{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:10px;
+}
+
+h4{margin:5px 0;}
 </style>
 
 </head>
@@ -19,57 +51,72 @@ button{width:100%;padding:10px;background:#0b7a3d;color:white;border:none;margin
 <body>
 
 <header>
-<h2>Shop Products</h2>
+<h2>Marketplace</h2>
 </header>
 
-<div class="container" id="products"></div>
+<div class="container">
 
-<script>
+<input id="search" placeholder="Search products..." onkeyup="filterProducts()">
 
-let products = JSON.parse(localStorage.getItem("products")) || [];
+<select id="category" onchange="filterProducts()">
+<option value="">All Categories</option>
+<option>Phones</option>
+<option>Fashion</option>
+<option>Electronics</option>
+</select>
 
-let box = document.getElementById("products");
-
-products.forEach(function(product,index){
-
-box.innerHTML += `
-
-<div class="product">
-
-<img src="${product.images[0]}">
-
-<h3>${product.name}</h3>
-
-<p>₦${product.price}</p>
-
-<p>${product.description}</p>
-
-<button onclick="viewProduct(${index})">View</button>
-
-<button onclick="addCart(${index})">Add To Cart</button>
+<div class="grid" id="products"></div>
 
 </div>
 
+<script>
+
+let allProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+function displayProducts(list){
+
+let container = document.getElementById("products");
+
+container.innerHTML = "";
+
+list.forEach((product,index)=>{
+
+container.innerHTML += `
+<div class="card" onclick="view(${index})">
+<img src="${product.images[0]}">
+<h4>${product.name}</h4>
+<p>₦${product.price}</p>
+</div>
 `;
 
 });
 
-function viewProduct(index){
-localStorage.setItem("selectedProduct", JSON.stringify(products[index]));
-location.href="product.html";
 }
 
-function addCart(index){
+function filterProducts(){
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let text = document.getElementById("search").value.toLowerCase();
+let cat = document.getElementById("category").value;
 
-cart.push(products[index]);
+let filtered = allProducts.filter(p => {
 
-localStorage.setItem("cart", JSON.stringify(cart));
+let matchText = p.name.toLowerCase().includes(text);
+let matchCat = cat === "" || p.category === cat;
 
-alert("Added to cart");
+return matchText && matchCat;
+
+});
+
+displayProducts(filtered);
 
 }
+
+function view(index){
+localStorage.setItem("selectedProduct", JSON.stringify(allProducts[index]));
+window.location = "product.html";
+}
+
+displayProducts(allProducts);
 
 </script>
 
