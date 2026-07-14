@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>Dream Team Market</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <style>
 
@@ -10,35 +14,83 @@ body{
 font-family:Arial;
 margin:0;
 background:#f5f5f5;
-text-align:center;
 }
 
-.header{
-background:#0b8f4d;
+
+header{
+
+background:#0b7a3d;
 color:white;
-padding:30px;
-font-size:30px;
+padding:20px;
+text-align:center;
+
 }
 
-.container{
+
+.hero{
+
 padding:40px 20px;
+text-align:center;
+
 }
+
+
+.hero h1{
+
+font-size:35px;
+
+}
+
+
+.hero p{
+
+font-size:18px;
+
+}
+
 
 button{
-background:#0b8f4d;
+
+background:#0b7a3d;
 color:white;
-border:0;
-padding:15px 30px;
-margin:10px;
+border:none;
+padding:14px 30px;
 border-radius:5px;
-font-size:16px;
+font-size:17px;
+
 }
 
-a{
-text-decoration:none;
+
+.section{
+
+padding:20px;
+
 }
+
+
+.card{
+
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 2px 5px #ccc;
+
+}
+
+
+footer{
+
+background:#0b7a3d;
+color:white;
+padding:15px;
+text-align:center;
+
+}
+
 
 </style>
+
 
 </head>
 
@@ -46,40 +98,101 @@ text-decoration:none;
 <body>
 
 
-<div class="header">
+<header>
 
-Dream Team Market
+<h2>Dream Team Market</h2>
 
-</div>
+<p>Buy • Sell • Grow</p>
+
+</header>
 
 
-<div class="container">
+
+
+<div class="hero">
 
 
 <h1>Welcome to Dream Team Market</h1>
 
+
 <p>
-Buy and sell products easily with trusted vendors.
+
+The online marketplace connecting customers and vendors.
+
 </p>
 
 
-<a href="register.html">
-<button>Create Account</button>
-</a>
+<button onclick="window.location.href='login.html'">
 
+Get Started
 
-<a href="login.html">
-<button>Login</button>
-</a>
-
-
-<a href="customer.html">
-<button>Shop Now</button>
-</a>
+</button>
 
 
 </div>
 
 
+
+
+<div class="section">
+
+
+<div class="card">
+
+<h3>For Customers</h3>
+
+<p>
+
+Find products and services from trusted vendors.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>For Vendors</h3>
+
+<p>
+
+Create your store and sell your products online.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>Secure Payment</h3>
+
+<p>
+
+Fast and secure payment powered by Paystack.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+<footer>
+
+<p>© 2026 Dream Team Market</p>
+
+</footer>
+
+
+
 </body>
+
 </html>
