@@ -1,307 +1,104 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Dream Team Market</title>
 
-<title>Dream Team Market</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    nav {
+      background: #222;
+      padding: 15px;
+    }
 
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-<style>
+    nav a:hover {
+      color: orange;
+    }
 
-body{
-font-family:Arial;
-margin:0;
-background:#f5f5f5;
-padding-bottom:70px;
-}
+    .page {
+      padding: 40px;
+    }
 
+    input {
+      padding: 10px;
+      width: 250px;
+      margin: 5px;
+    }
 
-header{
+    button {
+      padding: 10px 20px;
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
 
-background:#0b7a3d;
-color:white;
-padding:20px;
-text-align:center;
-
-}
-
-
-nav{
-
-margin-top:15px;
-
-}
-
-
-nav a{
-
-color:white;
-text-decoration:none;
-margin:6px;
-font-size:14px;
-
-}
-
-
-.hero{
-
-background:white;
-padding:40px 20px;
-text-align:center;
-
-}
-
-
-.hero h1{
-
-font-size:32px;
-
-}
-
-
-button{
-
-background:#0b7a3d;
-color:white;
-border:none;
-padding:14px 30px;
-border-radius:5px;
-font-size:16px;
-
-}
-
-
-.section{
-
-padding:20px;
-
-}
-
-
-.grid{
-
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-
-}
-
-
-.card{
-
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 5px #ccc;
-
-}
-
-
-.bottom-menu{
-
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#0b7a3d;
-display:flex;
-justify-content:space-around;
-padding:10px 0;
-
-}
-
-
-.bottom-menu a{
-
-color:white;
-text-decoration:none;
-text-align:center;
-font-size:13px;
-
-}
-
-
-footer{
-
-background:#0b7a3d;
-color:white;
-text-align:center;
-padding:15px;
-
-}
-
-
-</style>
-
-
+    button:hover {
+      background: orange;
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-<header>
-
-
-<h2>Dream Team Market</h2>
-
-<p>Buy • Sell • Grow</p>
-
-
-
+<!-- NAVBAR -->
 <nav>
-
-<a href="index.html">Home</a>
-
-<a href="customer.html">Shop</a>
-
-<a href="login.html">Login</a>
-
-<a href="register.html">Register</a>
-
-<a href="vendor.html">Vendor</a>
-
+  <a onclick="navigate('home')">Home</a>
+  <a onclick="navigate('login')">Login</a>
+  <a onclick="navigate('register')">Register</a>
 </nav>
 
-
-</header>
-
-
-
-
-
-<div class="hero">
-
-
-<h1>Welcome to Dream Team Market</h1>
-
-
-<p>
-
-The online marketplace connecting buyers and sellers.
-
-</p>
-
-
-
-<button onclick="location.href='register.html'">
-
-Get Started
-
-</button>
-
-
-
+<!-- HOME -->
+<div id="home" class="page">
+  <h1>Welcome to Dream Team Market</h1>
+  <p>Your marketplace is now working 🎉</p>
 </div>
 
-
-
-
-
-<div class="section">
-
-
-<h2>Our Services</h2>
-
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<h3>🛒 Marketplace</h3>
-
-<p>Buy products from trusted vendors.</p>
-
+<!-- LOGIN -->
+<div id="login" class="page" style="display:none;">
+  <h2>Login</h2>
+  <input type="email" placeholder="Email"><br>
+  <input type="password" placeholder="Password"><br>
+  <button onclick="alert('Login clicked')">Login</button>
 </div>
 
-
-
-<div class="card">
-
-<h3>🏪 Vendor Store</h3>
-
-<p>Create your store and sell online.</p>
-
+<!-- REGISTER -->
+<div id="register" class="page" style="display:none;">
+  <h2>Register</h2>
+  <input type="text" placeholder="Name"><br>
+  <input type="email" placeholder="Email"><br>
+  <input type="password" placeholder="Password"><br>
+  <button onclick="alert('Register clicked')">Register</button>
 </div>
 
+<!-- SCRIPT -->
+<script>
+function navigate(page) {
+  document.querySelectorAll(".page").forEach(p => {
+    p.style.display = "none";
+  });
 
+  document.getElementById(page).style.display = "block";
+}
 
-<div class="card">
-
-<h3>💳 Secure Payment</h3>
-
-<p>Pay safely with online payment.</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>🚚 Orders</h3>
-
-<p>Manage your shopping orders.</p>
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-<footer>
-
-<p>© 2026 Dream Team Market</p>
-
-</footer>
-
-
-
-
-
-<div class="bottom-menu">
-
-
-<a href="index.html">
-🏠<br>
-Home
-</a>
-
-
-
-<a href="customer.html">
-🛒<br>
-Shop
-</a>
-
-
-
-<a href="vendor.html">
-🏪<br>
-Vendor
-</a>
-
-
-
-<a href="profile.html">
-👤<br>
-Profile
-</a>
-
-
-</div>
-
-
+window.onload = function () {
+  navigate("home");
+};
+</script>
 
 </body>
-
 </html>
