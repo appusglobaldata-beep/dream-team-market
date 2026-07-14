@@ -1,25 +1,178 @@
-let handler = PaystackPop.setup({
+<!DOCTYPE html>
+<html>
 
-key: 'pk_test_e5155a948fb02b41f36d131f41e7d19a22b9ed22',
+<head>
 
-email: 'customer@email.com',
+<title>Dream Team Market - Payment</title>
 
-amount: productPrice * 100,
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-currency: 'NGN',
 
-callback: function(response){
+<style>
 
-alert("Payment Successful. Reference: " + response.reference);
+body{
+font-family:Arial;
+background:#f5f5f5;
+margin:0;
+}
 
-window.location.href="customer.html";
+header{
+background:#0b7a3d;
+color:white;
+padding:20px;
+text-align:center;
+}
 
-},
+.box{
 
-onClose: function(){
-
-alert("Payment cancelled");
+background:white;
+margin:20px;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 5px #ccc;
 
 }
 
+button{
+
+width:100%;
+padding:12px;
+background:#0b7a3d;
+color:white;
+border:none;
+border-radius:5px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h2>Dream Team Market</h2>
+
+<p>Checkout</p>
+
+</header>
+
+
+
+
+<div class="box" id="order">
+
+<h3>Order Details</h3>
+
+<p>Loading...</p>
+
+</div>
+
+
+
+<button onclick="payNow()">
+
+Pay Now
+
+</button>
+
+
+
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+
+
+<script>
+
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+let product = products[products.length - 1];
+
+
+
+if(product){
+
+
+document.getElementById("order").innerHTML=`
+
+<h3>${product.name}</h3>
+
+<p>Vendor: ${product.store}</p>
+
+<p>Price: ₦${product.price}</p>
+
+<p>${product.description}</p>
+
+`;
+
+
+}
+
+
+
+
+function payNow(){
+
+
+
+let handler = PaystackPop.setup({
+
+
+key:'pk_test_e5155a948fb02b41f36d131f41e7d19a22b9ed22',
+
+
+email:'customer@email.com',
+
+
+amount:1000000,
+
+
+currency:'NGN',
+
+
+
+callback:function(response){
+
+
+alert("Payment Successful Reference: "+response.reference);
+
+
+window.location.href="customer.html";
+
+
+},
+
+
+
+onClose:function(){
+
+
+alert("Payment Cancelled");
+
+
+}
+
+
 });
+
+
+
+handler.openIframe();
+
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
