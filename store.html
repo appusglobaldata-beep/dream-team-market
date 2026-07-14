@@ -1,100 +1,75 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<title>Dream Team Market - Store</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f5f5f5;
-}
-
-header{
-background:#0b7a3d;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-.box{
-background:white;
-margin:20px;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 5px #ccc;
-}
-
-.badge{
-background:#0b7a3d;
-color:white;
-padding:8px;
-border-radius:20px;
-display:inline-block;
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<header>
-
-<h2>Dream Team Market</h2>
-
-<p>Vendor Store</p>
-
-</header>
-
-
-
-<div class="box" id="store">
-
-
-</div>
-
-
-
 <script>
 
 
 let product = JSON.parse(localStorage.getItem("selectedProduct"));
 
+let verification = JSON.parse(localStorage.getItem("verification")) || [];
+
 let box=document.getElementById("store");
+
+
+
+let verified = false;
+
 
 
 if(product){
 
 
+verification.forEach(function(v){
+
+
+if(v.store == product.store && v.status == "Verified"){
+
+verified = true;
+
+}
+
+
+});
+
+
+
+
 box.innerHTML=`
+
 
 <h2>${product.store}</h2>
 
-<span class="badge">
-✔ Verified Vendor
-</span>
+
+
+${verified ? 
+
+'<span class="badge">✔ Verified Vendor</span>' 
+
+: 
+
+'<span>New Vendor</span>'}
+
+
 
 <hr>
 
+
 <h3>Product</h3>
+
 
 <p>${product.name}</p>
 
+
 <p>Category: ${product.category}</p>
+
 
 <p>Price: ₦${product.price}</p>
 
+
 <p>${product.description}</p>
 
+
+
 `;
+
+
 
 }
 
@@ -108,9 +83,3 @@ box.innerHTML="<h3>Store not found</h3>";
 
 
 </script>
-
-
-
-</body>
-
-</html>
