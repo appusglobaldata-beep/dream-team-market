@@ -2,154 +2,85 @@
 <html>
 
 <head>
-
-<title>Dream Team Market - Vendor Orders</title>
-
+<title>Dream Team Market - Vendor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f5f5f5;
-}
-
-header{
-background:#0b7a3d;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-.container{
-padding:20px;
-}
-
-.order{
-
-background:white;
-padding:15px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 5px #ccc;
-
-}
-
-button{
-
-background:#0b7a3d;
-color:white;
-border:none;
-padding:10px;
-border-radius:5px;
-
-}
-
+body{font-family:Arial;margin:0;background:#f5f5f5;padding-bottom:70px;}
+header{background:#0b7a3d;color:white;padding:20px;text-align:center;}
+.container{padding:20px;}
+.card{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 5px #ccc;}
+input,textarea,select{width:100%;padding:12px;margin:8px 0;}
+button{width:100%;padding:12px;background:#0b7a3d;color:white;border:none;border-radius:5px;}
 </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
 <h2>Dream Team Market</h2>
-
-<p>Vendor Orders</p>
-
+<p>Add Product</p>
 </header>
 
+<div class="container">
+<div class="card">
 
+<input id="store" placeholder="Store Name">
+<input id="name" placeholder="Product Name">
 
-<div class="container" id="orders">
+<select id="category">
+<option>Phones</option>
+<option>Fashion</option>
+<option>Electronics</option>
+<option>Services</option>
+</select>
+
+<input id="price" placeholder="Price">
+<textarea id="description" placeholder="Description"></textarea>
+
+<input type="file" id="image">
+
+<button onclick="addProduct()">Publish Product</button>
 
 </div>
-
-
-
+</div>
 
 <script>
 
+function addProduct(){
 
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
+let file = document.getElementById("image").files[0];
 
-let box = document.getElementById("orders");
+let reader = new FileReader();
 
+reader.onload = function(){
 
-
-if(orders.length == 0){
-
-box.innerHTML="<h3>No Orders Yet</h3>";
-
-}
-
-
-
-orders.forEach(function(order,index){
-
-
-box.innerHTML += `
-
-
-<div class="order">
-
-
-<h3>${order.name}</h3>
-
-
-<p>Price: ₦${order.price}</p>
-
-
-<p>Status: ${order.status}</p>
-
-
-
-<button onclick="completeOrder(${index})">
-
-Complete
-
-</button>
-
-
-</div>
-
-
-`;
-
-
-
+products.push({
+store:store.value,
+name:name.value,
+category:category.value,
+price:price.value,
+description:description.value,
+image:reader.result
 });
 
+localStorage.setItem("products", JSON.stringify(products));
 
+alert("Product Published!");
 
+};
 
-
-function completeOrder(index){
-
-
-orders[index].status="Completed";
-
-
-localStorage.setItem("orders",JSON.stringify(orders));
-
-
-alert("Order Completed");
-
-
-location.reload();
-
-
+if(file){
+reader.readAsDataURL(file);
+}else{
+alert("Select an image");
 }
 
-
+}
 
 </script>
 
-
 </body>
-
 </html>
