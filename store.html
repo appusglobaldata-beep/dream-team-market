@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>Vendor Store - Dream Team Market</title>
+<title>Dream Team Market - Store</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
@@ -12,54 +15,27 @@ margin:0;
 background:#f5f5f5;
 }
 
-.header{
-background:#0b8f4d;
+header{
+background:#0b7a3d;
 color:white;
 padding:20px;
 text-align:center;
-font-size:25px;
 }
 
-.container{
-padding:20px;
-}
-
-.profile{
+.box{
 background:white;
+margin:20px;
 padding:20px;
 border-radius:10px;
-text-align:center;
-box-shadow:0 2px 8px #ccc;
+box-shadow:0 2px 5px #ccc;
 }
 
-.profile img{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-}
-
-.product{
-background:white;
-padding:15px;
-margin-top:15px;
-border-radius:10px;
-box-shadow:0 2px 8px #ccc;
-}
-
-.product img{
-width:150px;
-height:150px;
-object-fit:cover;
-border-radius:10px;
-}
-
-button{
-background:#0b8f4d;
+.badge{
+background:#0b7a3d;
 color:white;
-border:0;
-padding:12px;
-border-radius:5px;
+padding:8px;
+border-radius:20px;
+display:inline-block;
 }
 
 </style>
@@ -70,34 +46,17 @@ border-radius:5px;
 <body>
 
 
-<div class="header">
-Dream Team Market Store
-</div>
+<header>
 
+<h2>Dream Team Market</h2>
 
-<div class="container">
+<p>Vendor Store</p>
 
-
-<div class="profile">
-
-<img id="logo">
-
-<h2 id="storeName">Vendor Store</h2>
-
-<p id="location"></p>
-
-<p id="phone"></p>
-
-
-</div>
+</header>
 
 
 
-<h2>Products</h2>
-
-
-<div id="products"></div>
-
+<div class="box" id="store">
 
 
 </div>
@@ -107,61 +66,51 @@ Dream Team Market Store
 <script>
 
 
-let store=JSON.parse(localStorage.getItem("store")) || {};
+let product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+let box=document.getElementById("store");
 
 
-document.getElementById("storeName").innerHTML =
-store.name || "Vendor Store";
+if(product){
 
 
-document.getElementById("location").innerHTML =
-store.location || "";
+box.innerHTML=`
+
+<h2>${product.store}</h2>
+
+<span class="badge">
+✔ Verified Vendor
+</span>
+
+<hr>
+
+<h3>Product</h3>
+
+<p>${product.name}</p>
+
+<p>Category: ${product.category}</p>
+
+<p>Price: ₦${product.price}</p>
+
+<p>${product.description}</p>
+
+`;
+
+}
+
+else{
 
 
-document.getElementById("phone").innerHTML =
-store.phone || "";
-
-
-if(store.logo){
-
-document.getElementById("logo").src=store.logo;
+box.innerHTML="<h3>Store not found</h3>";
 
 }
 
 
 
-let products=JSON.parse(localStorage.getItem("products")) || [];
-
-
-let output="";
-
-
-products.forEach(p=>{
-
-output+=`
-
-<div class="product">
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<p>₦${p.price}</p>
-
-<button>Buy Now</button>
-
-</div>
-
-`;
-
-});
-
-
-document.getElementById("products").innerHTML=output;
-
-
 </script>
 
 
+
 </body>
+
 </html>
