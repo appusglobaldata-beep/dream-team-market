@@ -7,99 +7,58 @@
 <style>
 
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f5f5f5;
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
 }
-
 
 header{
-    background:#008000;
-    color:white;
-    padding:25px;
-    text-align:center;
+background:#008000;
+color:white;
+padding:25px;
+text-align:center;
 }
-
 
 .container{
-    padding:25px;
+padding:25px;
 }
-
-
 
 .card{
-    background:white;
-    padding:25px;
-    margin-bottom:20px;
-    border-radius:15px;
-    box-shadow:0 5px 15px #ddd;
+background:white;
+padding:25px;
+margin-bottom:20px;
+border-radius:15px;
+box-shadow:0 5px 15px #ddd;
 }
-
-
 
 input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ddd;
-    border-radius:5px;
+width:100%;
+padding:12px;
+margin:10px 0;
 }
-
-
 
 button{
-
-    background:#008000;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:5px;
-    cursor:pointer;
-
+background:#008000;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:5px;
+cursor:pointer;
 }
 
-
-
-.product{
-
-    border:1px solid #ddd;
-    padding:15px;
-    margin:15px 0;
-    border-radius:10px;
-
+.product,.order{
+border:1px solid #ddd;
+padding:15px;
+margin:10px 0;
+border-radius:10px;
 }
-
-
 
 .product img{
-
-    width:120px;
-    height:120px;
-    object-fit:cover;
-    border-radius:10px;
-
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:10px;
 }
-
-
-
-nav{
-
-background:white;
-padding:15px;
-text-align:center;
-
-}
-
-
-nav a{
-
-color:#008000;
-text-decoration:none;
-margin:10px;
-font-weight:bold;
-
-}
-
 
 </style>
 
@@ -119,29 +78,13 @@ font-weight:bold;
 
 
 
-<nav>
-
-<a href="index.html">
-Home
-</a>
-
-
-<a href="customer.html">
-Marketplace
-</a>
-
-
-</nav>
-
-
-
-
 <div class="container">
+
 
 
 <div class="card">
 
-<h2>Add New Product</h2>
+<h2>Add Product</h2>
 
 
 <input id="name" placeholder="Product Name">
@@ -150,9 +93,7 @@ Marketplace
 <input id="price" placeholder="Product Price">
 
 
-
 <input type="file" id="image" accept="image/*">
-
 
 
 <button onclick="addProduct()">
@@ -165,16 +106,23 @@ Upload Product
 
 
 
-
 <div class="card">
 
 <h2>Your Products</h2>
 
-
-<div id="list">
+<div id="list"></div>
 
 </div>
 
+
+
+
+
+<div class="card">
+
+<h2>Customer Orders</h2>
+
+<div id="orders"></div>
 
 </div>
 
@@ -199,7 +147,6 @@ let price=document.getElementById("price").value;
 let image=document.getElementById("image").files[0];
 
 
-
 if(name=="" || price=="" || !image){
 
 alert("Complete product information");
@@ -211,7 +158,6 @@ return;
 
 
 let reader=new FileReader();
-
 
 
 reader.onload=function(e){
@@ -240,12 +186,12 @@ showProducts();
 };
 
 
-
 reader.readAsDataURL(image);
 
 
-
 }
+
+
 
 
 
@@ -254,9 +200,7 @@ function showProducts(){
 
 let products=JSON.parse(localStorage.getItem("products")) || [];
 
-
 let output="";
-
 
 
 products.forEach(function(p){
@@ -272,6 +216,43 @@ output += `
 
 <p>Price: ₦${p.price}</p>
 
+</div>
+
+`;
+
+
+});
+
+
+document.getElementById("list").innerHTML=output;
+
+
+}
+
+
+
+
+
+function showOrders(){
+
+
+let orders=JSON.parse(localStorage.getItem("orders")) || [];
+
+let output="";
+
+
+orders.forEach(function(o){
+
+
+output += `
+
+<div class="order">
+
+<h3>${o.product}</h3>
+
+<p>Price: ₦${o.price}</p>
+
+<p>Status: ${o.status}</p>
 
 </div>
 
@@ -281,14 +262,16 @@ output += `
 });
 
 
-
-document.getElementById("list").innerHTML=output;
+document.getElementById("orders").innerHTML=output;
 
 
 }
 
 
+
 showProducts();
+
+showOrders();
 
 
 </script>
