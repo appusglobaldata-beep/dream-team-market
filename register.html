@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Register - Dream Team Market</title>
 
 <style>
+
 body{
-    font-family:Arial;
+    font-family:Arial, sans-serif;
     background:#f5f5f5;
     display:flex;
     justify-content:center;
@@ -13,18 +15,23 @@ body{
     height:100vh;
 }
 
-.box{
+.register-box{
     background:white;
+    width:320px;
     padding:30px;
-    width:300px;
     border-radius:10px;
     box-shadow:0 0 10px #ccc;
 }
 
+h2{
+    text-align:center;
+}
+
 input, select{
     width:100%;
-    padding:10px;
+    padding:12px;
     margin:10px 0;
+    box-sizing:border-box;
 }
 
 button{
@@ -34,41 +41,81 @@ button{
     color:white;
     border:none;
     border-radius:5px;
+    cursor:pointer;
 }
 
-a{
-    text-decoration:none;
-}
 </style>
 
 </head>
 
+
 <body>
 
-<div class="box">
+
+<div class="register-box">
 
 <h2>Create Account</h2>
 
+
 <input type="text" placeholder="Full Name">
+
 
 <input type="email" placeholder="Email Address">
 
+
 <input type="password" placeholder="Password">
 
-<select>
-<option>Select Account Type</option>
-<option>Customer</option>
-<option>Vendor</option>
+
+
+<select id="accountType">
+
+<option value="">Select Account Type</option>
+
+<option value="customer.html">
+Customer
+</option>
+
+<option value="vendor.html">
+Vendor
+</option>
+
 </select>
 
-<button>Register</button>
 
-<p>
-Already have an account?
-<a href="login.html">Login</a>
-</p>
+
+<button onclick="createAccount()">
+Register
+</button>
+
 
 </div>
+
+
+
+
+<script>
+
+function createAccount(){
+
+let type = document.getElementById("accountType").value;
+
+
+if(type == ""){
+
+alert("Please select account type");
+
+}
+
+else{
+
+window.location.href = type;
+
+}
+
+}
+
+</script>
+
 
 </body>
 </html>
