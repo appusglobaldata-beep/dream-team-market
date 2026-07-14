@@ -1,46 +1,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Register Test</title>
+
+<title>Register - Dream Team Market</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    background:white;
+    width:320px;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px #ccc;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#008000;
+    color:white;
+    border:none;
+    border-radius:5px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>Dream Team Market Register</h1>
+<div class="box">
 
-<input type="text" placeholder="Name">
-<br><br>
+<h2>Create Customer/Vendor Account</h2>
 
-<select id="type">
-<option value="">Choose Account</option>
+
+<input id="name" type="text" placeholder="Full Name">
+
+
+<input id="email" type="email" placeholder="Email Address">
+
+
+<input id="password" type="password" placeholder="Password">
+
+
+<select id="accountType">
+
+<option value="">Select Account Type</option>
+
 <option value="customer.html">Customer</option>
+
 <option value="vendor.html">Vendor</option>
+
 </select>
 
-<br><br>
 
-<button onclick="testRegister()">Register</button>
+<button onclick="registerUser()">
+Register
+</button>
+
+
+</div>
 
 
 <script>
 
-function testRegister(){
+function registerUser(){
 
-var page = document.getElementById("type").value;
+let name = document.getElementById("name").value;
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+let type = document.getElementById("accountType").value;
 
-if(page==""){
 
-alert("Select account type");
+if(name=="" || email=="" || password=="" || type==""){
 
-}else{
+alert("Please complete all fields");
 
-window.location = page;
+return;
 
 }
+
+
+localStorage.setItem("userName", name);
+localStorage.setItem("userEmail", email);
+localStorage.setItem("accountType", type);
+
+
+window.location.href = type;
+
 
 }
 
 </script>
+
 
 </body>
 </html>
