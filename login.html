@@ -7,6 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <style>
 
 body{
@@ -16,6 +17,7 @@ margin:0;
 }
 
 .box{
+
 background:white;
 width:90%;
 max-width:400px;
@@ -23,28 +25,28 @@ margin:50px auto;
 padding:20px;
 border-radius:10px;
 box-shadow:0 2px 5px #ccc;
+
 }
 
 input{
+
 width:100%;
 padding:12px;
-margin:10px 0;
+margin:8px 0;
 border:1px solid #ccc;
 border-radius:5px;
+
 }
 
 button{
+
 width:100%;
 padding:12px;
 background:#0b7a3d;
 color:white;
 border:none;
 border-radius:5px;
-}
 
-a{
-text-decoration:none;
-color:#0b7a3d;
 }
 
 </style>
@@ -57,15 +59,16 @@ color:#0b7a3d;
 
 <div class="box">
 
+
 <h2>Dream Team Market</h2>
 
 <h3>Login</h3>
 
 
-<input type="email" placeholder="Email">
+<input id="email" type="email" placeholder="Email">
 
 
-<input type="password" placeholder="Password">
+<input id="password" type="password" placeholder="Password">
 
 
 <button onclick="login()">
@@ -75,25 +78,75 @@ Login
 </button>
 
 
-<p>
-Don't have an account?
-<a href="register.html">Register</a>
-</p>
-
 
 </div>
 
 
 
+
 <script>
+
 
 function login(){
 
-alert("Login Successful");
+
+let user = JSON.parse(localStorage.getItem("user"));
+
+
+
+if(!user){
+
+alert("Account not found. Please register first.");
+
+window.location.href="register.html";
+
+return;
+
+}
+
+
+
+let email=document.getElementById("email").value;
+
+let password=document.getElementById("password").value;
+
+
+
+if(email==user.email && password==user.password){
+
+
+localStorage.setItem("loggedIn","yes");
+
+
+
+if(user.type=="Vendor"){
+
+window.location.href="vendor.html";
+
+}
+
+else{
 
 window.location.href="customer.html";
 
 }
+
+
+
+}
+
+else{
+
+
+alert("Wrong email or password");
+
+
+}
+
+
+
+}
+
 
 </script>
 
