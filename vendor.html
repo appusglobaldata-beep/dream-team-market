@@ -2,238 +2,99 @@
 <html>
 
 <head>
-
-<title>Dream Team Market - Vendor</title>
-
+<title>Vendor - Add Product</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f5f5f5;
-padding-bottom:70px;
-}
-
-header{
-background:#0b7a3d;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-nav a{
-
-color:white;
-text-decoration:none;
-margin:5px;
-font-size:14px;
-
-}
-
-nav{
-
-margin-top:15px;
-
-}
-
-.container{
-padding:20px;
-}
-
-.card{
-
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 5px #ccc;
-
-}
-
-input,textarea,select{
-
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:5px;
-border:1px solid #ccc;
-
-}
-
-button{
-
-width:100%;
-padding:12px;
-background:#0b7a3d;
-color:white;
-border:none;
-border-radius:5px;
-
-}
-
-
-.bottom-menu{
-
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#0b7a3d;
-display:flex;
-justify-content:space-around;
-padding:10px 0;
-
-}
-
-
-.bottom-menu a{
-
-color:white;
-text-decoration:none;
-text-align:center;
-font-size:13px;
-
-}
-
+body{font-family:Arial;background:#f5f5f5;margin:0;}
+header{background:#0b7a3d;color:white;padding:20px;text-align:center;}
+.container{padding:20px;}
+.card{background:white;padding:20px;border-radius:10px;}
+input,textarea,select{width:100%;padding:10px;margin:8px 0;}
+button{width:100%;padding:12px;background:#0b7a3d;color:white;border:none;}
 </style>
 
 </head>
 
-
 <body>
 
-
 <header>
-
-<h2>Dream Team Market</h2>
-
-<p>Vendor Dashboard</p>
-
-
-<nav>
-
-<a href="vendor.html">Add Product</a>
-
-<a href="vendor-orders.html">Orders</a>
-
-<a href="profile.html">Profile</a>
-
-</nav>
-
-
+<h2>Add Product</h2>
 </header>
 
-
-
 <div class="container">
-
-
 <div class="card">
 
-
-<h3>Add Product</h3>
-
-
 <input id="store" placeholder="Store Name">
-
-
 <input id="name" placeholder="Product Name">
 
-
 <select id="category">
-
-<option>Select Category</option>
-
 <option>Phones</option>
-
 <option>Fashion</option>
-
 <option>Electronics</option>
-
-<option>Services</option>
-
 </select>
 
-
-
 <input id="price" placeholder="Price">
-
-
 <textarea id="description" placeholder="Description"></textarea>
 
+<input type="file" id="images" multiple>
 
-
-<button onclick="addProduct()">
-
-Publish Product
-
-</button>
-
-
+<button onclick="addProduct()">Publish Product</button>
 
 </div>
-
-
 </div>
-
-
-
-
-<div class="bottom-menu">
-
-<a href="index.html">🏠<br>Home</a>
-
-<a href="customer.html">🛒<br>Shop</a>
-
-<a href="vendor-orders.html">📦<br>Orders</a>
-
-<a href="profile.html">👤<br>Profile</a>
-
-</div>
-
-
-
 
 <script>
 
-
 function addProduct(){
 
+let files = document.getElementById("images").files;
+
+if(files.length === 0){
+alert("Select images");
+return;
+}
 
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
+let images = [];
+let count = 0;
+
+for(let i=0;i<files.length;i++){
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+
+images.push(e.target.result);
+count++;
+
+if(count === files.length){
 
 products.push({
-
-store:document.getElementById("store").value,
-
-name:document.getElementById("name").value,
-
-category:document.getElementById("category").value,
-
-price:document.getElementById("price").value,
-
-description:document.getElementById("description").value
-
+store:store.value,
+name:name.value,
+category:category.value,
+price:price.value,
+description:description.value,
+images:images
 });
 
+localStorage.setItem("products", JSON.stringify(products));
 
-
-localStorage.setItem("products",JSON.stringify(products));
-
-
-alert("Product Published Successfully!");
-
-
+alert("Product Published!");
 
 }
 
+};
+
+reader.readAsDataURL(files[i]);
+
+}
+
+}
 
 </script>
 
-
-
 </body>
-
 </html>
