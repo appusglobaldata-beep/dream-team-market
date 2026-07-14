@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Checkout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{font-family:Arial;background:#f5f5f5;margin:0;}
+header{background:#0b7a3d;color:white;padding:15px;text-align:center;}
+.container{padding:15px;}
+
+.box{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+input,select,button{
+width:100%;
+padding:10px;
+margin:5px 0;
+}
+
+button{
+background:#0b7a3d;
+color:white;
+border:none;
+}
+
+.total{
+font-weight:bold;
+text-align:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>Checkout</h2>
+<a href="cart.html" style="color:white;">← Back to Cart</a>
+</header>
+
+<div class="container">
+
+<div class="box">
+<h3>Delivery Info</h3>
+<input id="name" placeholder="Full Name">
+<input id="address" placeholder="Address">
+<input id="phone" placeholder="Phone Number">
+</div>
+
+<div class="box">
+<h3>Payment Method</h3>
+<select id="payment">
+<option>Cash on Delivery</option>
+<option>Card (Demo)</option>
+</select>
+</div>
+
+<div class="box total" id="total"></div>
+
+<button onclick="placeOrder()">Place Order</button>
+
+</div>
+
+<script>
+
+let currentUser = localStorage.getItem("currentUser");
+
+if(!currentUser){
+window.location = "login.html";
+}
+
+let cart = JSON.parse(localStorage.getItem("cart_" + currentUser)) || [];
+
+let total = 0;
+
+cart.forEach(item => total += Number(item.price));
+
+document.getElementById("total").innerHTML = "Total: ₦" + total;
+
+function placeOrder(){
+
+if(name.value === "" || address.value === "" || phone.value === ""){
+alert("Fill all fields");
+return;
+}
+
+let orders = JSON.parse(localStorage.getItem("orders_" + currentUser)) || [];
+
+orders.push({
+items: cart,
+total: total,
+name: name.value,
+address: address.value,
+phone: phone.value,
+payment: payment.value,
+date: new Date().toLocaleString()
+});
+
+localStorage.setItem("orders_" + currentUser, JSON.stringify(orders));
+
+// clear cart
+localStorage.removeItem("cart_" + currentUser);
+
+alert("Order placed successfully!");
+
+window.location = "orders.html";
+
+}
+
+</script>
+
+</body>
+</html>
