@@ -1,121 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Register - Dream Team Market</title>
-
-<style>
-
-body{
-    font-family:Arial, sans-serif;
-    background:#f5f5f5;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.register-box{
-    background:white;
-    width:320px;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px #ccc;
-}
-
-h2{
-    text-align:center;
-}
-
-input, select{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    box-sizing:border-box;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:#008000;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-</style>
-
+<title>Register Test</title>
 </head>
-
 
 <body>
 
+<h1>Dream Team Market Register</h1>
 
-<div class="register-box">
+<input type="text" placeholder="Name">
+<br><br>
 
-<h2>Create Account</h2>
-
-
-<input type="text" placeholder="Full Name">
-
-
-<input type="email" placeholder="Email Address">
-
-
-<input type="password" placeholder="Password">
-
-
-
-<select id="accountType">
-
-<option value="">Select Account Type</option>
-
-<option value="customer.html">
-Customer
-</option>
-
-<option value="vendor.html">
-Vendor
-</option>
-
+<select id="type">
+<option value="">Choose Account</option>
+<option value="customer.html">Customer</option>
+<option value="vendor.html">Vendor</option>
 </select>
 
+<br><br>
 
-
-<button onclick="createAccount()">
-Register
-</button>
-
-
-</div>
-
-
+<button onclick="testRegister()">Register</button>
 
 
 <script>
 
-function createAccount(){
+function testRegister(){
 
-let type = document.getElementById("accountType").value;
+var page = document.getElementById("type").value;
 
+if(page==""){
 
-if(type == ""){
+alert("Select account type");
 
-alert("Please select account type");
+}else{
 
-}
-
-else{
-
-window.location.href = type;
+window.location = page;
 
 }
 
 }
 
 </script>
-
 
 </body>
 </html>
