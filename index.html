@@ -3,17 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dream Team</title>
+<title>Dream Team Market</title>
 
 <style>
-body {margin:0;font-family:Arial;background:#0f172a;color:white;}
-nav {display:flex;justify-content:space-between;padding:15px;background:#020617;}
-nav button {background:#2563eb;border:none;padding:8px;color:white;cursor:pointer;margin-left:5px;}
-.page {display:none;padding:20px;}
+body {
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+}
+
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  background:#020617;
+}
+
+nav button {
+  margin-left:5px;
+  padding:8px 12px;
+  background:#2563eb;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+.page {display:none; padding:20px;}
 .active {display:block;}
-input, select {display:block;margin:10px 0;padding:10px;width:100%;}
+
+input {
+  display:block;
+  margin:10px 0;
+  padding:10px;
+  width:100%;
+}
+
 button {padding:10px;}
-.product {background:#1e293b;padding:10px;margin:10px 0;}
+
+.products {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.card {
+  background:#1e293b;
+  padding:10px;
+  border-radius:10px;
+}
+
+.card img {
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:8px;
+}
 </style>
 </head>
 
@@ -33,7 +78,7 @@ button {padding:10px;}
 <!-- HOME -->
 <div id="home" class="page active">
   <h1>Marketplace</h1>
-  <div id="products"></div>
+  <div id="products" class="products"></div>
 </div>
 
 <!-- LOGIN -->
@@ -50,10 +95,12 @@ button {padding:10px;}
   <input id="regName" placeholder="Name">
   <input id="regEmail" placeholder="Email">
   <input id="regPass" type="password" placeholder="Password">
+
   <select id="role">
     <option value="customer">Customer</option>
     <option value="vendor">Vendor</option>
   </select>
+
   <button onclick="register()">Register</button>
 </div>
 
@@ -64,14 +111,18 @@ button {padding:10px;}
 
   <div id="vendorArea" style="display:none;">
     <h3>Add Product</h3>
+
     <input id="prodName" placeholder="Product name">
-    <button onclick="addProduct()">Add Product</button>
+    <input id="prodPrice" type="number" placeholder="Price">
+    <input id="prodImage" type="file">
+
+    <button onclick="addProduct()">Upload Product</button>
   </div>
 </div>
 
 <!-- CART -->
 <div id="cart" class="page">
-  <h2>Your Cart</h2>
+  <h2>Cart</h2>
   <div id="cartItems"></div>
 </div>
 
@@ -82,7 +133,7 @@ let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
 let products = JSON.parse(localStorage.getItem("products")) || [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// NAVIGATION
+// NAV
 function showPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
@@ -109,12 +160,8 @@ function register(){
 function login(){
   let user = JSON.parse(localStorage.getItem("user"));
 
-  if(!user){
-    alert("No user found");
-    return;
-  }
-
   if(loginEmail.value === user.email && loginPass.value === user.pass){
+
     currentUser = user;
     localStorage.setItem("currentUser", JSON.stringify(user));
 
@@ -125,10 +172,10 @@ function login(){
       vendorArea.style.display = "block";
     }
 
-    alert("Login success");
     showPage("dashboard");
+
   } else {
-    alert("Wrong login details");
+    alert("Wrong details");
   }
 }
 
@@ -136,27 +183,37 @@ function login(){
 function logout(){
   localStorage.removeItem("currentUser");
   currentUser = null;
-  alert("Logged out");
   showPage("home");
 }
 
-// PRODUCTS
+// ADD PRODUCT WITH IMAGE
 function addProduct(){
-  if(!currentUser || currentUser.role !== "vendor"){
-    alert("Only vendors can add products");
+
+  let name = prodName.value;
+  let price = prodPrice.value;
+  let file = prodImage.files[0];
+
+  if(!name || !price || !file){
+    alert("Fill all fields");
     return;
   }
 
-  let name = prodName.value;
-  if(!name) return;
+  let reader = new FileReader();
+  reader.onload = function(){
+    let product = {
+      name: name,
+      price: price,
+      image: reader.result
+    };
 
-  products.push({name});
-  localStorage.setItem("products", JSON.stringify(products));
+    products.push(product);
+    localStorage.setItem("products", JSON.stringify(products));
 
-  prodName.value = "";
-  alert("Product added");
+    renderProducts();
+    alert("Product uploaded!");
+  };
 
-  renderProducts();
+  reader.readAsDataURL(file);
 }
 
 // SHOW PRODUCTS
@@ -164,24 +221,21 @@ function renderProducts(){
   let container = document.getElementById("products");
   container.innerHTML = "";
 
-  if(products.length === 0){
-    container.innerHTML = "<p>No products yet</p>";
-    return;
-  }
-
   products.forEach(p=>{
     container.innerHTML += `
-      <div class="product">
+      <div class="card">
+        <img src="${p.image}">
         <h3>${p.name}</h3>
-        <button onclick="addToCart('${p.name}')">Add to Cart</button>
+        <p>$${p.price}</p>
+        <button onclick="addToCart('${p.name}', ${p.price})">Add to Cart</button>
       </div>
     `;
   });
 }
 
 // CART
-function addToCart(name){
-  cart.push(name);
+function addToCart(name, price){
+  cart.push({name, price});
   localStorage.setItem("cart", JSON.stringify(cart));
   alert("Added to cart");
 }
@@ -190,27 +244,13 @@ function renderCart(){
   let c = document.getElementById("cartItems");
   c.innerHTML = "";
 
-  if(cart.length === 0){
-    c.innerHTML = "<p>Cart is empty</p>";
-    return;
-  }
-
   cart.forEach(i=>{
-    c.innerHTML += `<p>${i}</p>`;
+    c.innerHTML += `<p>${i.name} - $${i.price}</p>`;
   });
 }
 
-// AUTO LOAD USER SESSION
+// LOAD
 window.onload = function(){
-  if(currentUser){
-    userInfo.innerText = "Welcome " + currentUser.name;
-    roleInfo.innerText = "Role: " + currentUser.role;
-
-    if(currentUser.role === "vendor"){
-      vendorArea.style.display = "block";
-    }
-  }
-
   renderProducts();
 };
 
